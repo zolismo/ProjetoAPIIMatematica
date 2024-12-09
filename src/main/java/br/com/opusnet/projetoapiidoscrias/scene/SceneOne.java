@@ -100,19 +100,11 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         person2Animation();
         person3Animation();
         person4Animation();
-    //    animationEnime2();
+        atualizeLife();
+        animationCircle();
 
-        Platform.runLater(() -> {
-            // animationBackground();
-            atualizeLife();
 
-            //animationEnime();
-            //animationTriangle();
-            animationCircle();
-            // animationSquare();
-            //animationLosangle();
-
-            if (LifeGame.lifeGame == 0) {
+        if (LifeGame.lifeGame == 0) {
                 //   controller.t_level1.setVisible(true);
                 //   controller.t_level1.setText("Você perdeu");
                 gameLoop.stop();
@@ -123,9 +115,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
                 controller.t_level1.setText("Você ganhou");
                 gameLoop.stop();
             }
-
             moveEnime();
-        });
     }
 
     public void atualizeLife() {
@@ -135,44 +125,26 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         }
     }
 
-    private void animationSquare() {
-        if (animationSquareProcessed && animationSquare < 58) {
-            animationSquare++;
-            updateImage("Char_Quadrado", "QuadradoSelecionado", animationSquare, 2);
-        } else if (animationSquare >= 30) {
-            animationSquareProcessed = false;
-            animationSquare = 0;
-        } else {
-            animationSquareProcessed = true;
-            animationSquare = 0;
+
+    private Image loadImage(String imagePath) {
+        Image image = imageCache.get(imagePath);
+        if (image == null) {
+            File file = new File(imagePath);
+            if (file.exists()) {
+                image = new Image(file.toURI().toString());
+                if (imageCache.size() >= 20) {
+
+                    imageCache.entrySet().iterator().next();
+                }
+                imageCache.put(imagePath, image);
+            } else {
+                System.out.println("Imagem não encontrada: " + imagePath);
+            }
         }
+        return image;
     }
 
-    private void animationLosangle() {
-        if (animationLosangreProcessed && animationLosangle < 3) {
-            animationLosangle++;
-            updateImage("Char_LosangoSelecionado", "Losango", animationLosangle, 3);
-        } else if (animationLosangle >= 30) {
-            animationLosangreProcessed = false;
-            animationLosangle = 0;
-        } else {
-            animationLosangreProcessed = true;
-            animationLosangle = 0;
-        }
-    }
 
-    private void animationTriangle() {
-        if (animationTriangleProcessed && animationTriangle < 30) {
-            animationTriangle++;
-            updateImage("Char_Triangulo", "TrianguloSelecionado", animationTriangle, 4);
-        } else if (animationTriangle >= 30) {
-            animationTriangleProcessed = false;
-            animationTriangle = 0;
-        } else {
-            animationTriangleProcessed = true;
-            animationTriangle = 0;
-        }
-    }
 
     private void animationCircle() {
         if (animationCircleProcessed && animationCircle < 33) {
@@ -214,29 +186,22 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         }
     }
 
-
     private void updateImage(String folder, String name, int index, int botao) {
-        
+
         String imagePath = String.format("src/main/resources/br/com/opusnet/projetoapiidoscrias/%s/Char_%s%02d.png", folder, name, index);
 
-        Image image = imageCache.get(imagePath);
+        Image image = loadImage(imagePath);
+
         if (image == null) {
-            File file = new File(imagePath);
-            if (file.exists()) {
-                image = new Image(file.toURI().toString());
-                imageCache.put(imagePath, image);
-            } else {
-                System.out.println("Imagem não encontrada: " + imagePath);
-                return;
-            }
+            return;
         }
+
 
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(50);
         imageView.setFitHeight(50);
 
-        Platform.runLater(()->{
-
+        Platform.runLater(() -> {
 
             switch (botao) {
                 case 1:
@@ -244,34 +209,25 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
                         controller.b_char1.setGraphic(imageView);
                     }
                     break;
-
-
                 case 2:
                     if (controller.b_char2 != null) {
                         controller.b_char2.setGraphic(imageView);
                     }
                     break;
-
                 case 3:
                     if (controller.b_char3 != null) {
                         controller.b_char3.setGraphic(imageView);
                     }
                     break;
-
                 case 4:
                     if (controller.b_char4 != null) {
                         controller.b_char4.setGraphic(imageView);
                     }
                     break;
-
-
-
             }
-
-
-
         });
     }
+
 
     private void handleButtonPress() {
         if (!buttonProcessed) {
@@ -448,31 +404,27 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
     private boolean controllerPersonFourAnimation = true;
 
     private void person1Animation() {
-        if (controllerPersonOneAnimation == true) {
+        if (!controllerPersonOneAnimation) {
+                return;
+        }
             Task<Void> task = new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
-                    while (controllerPersonFourAnimation) {
+                    while (controllerPersonOneAnimation) {
                         try {
-
-                            if (animationTriangleProcessed) {
-                                if (animationTriangle < 32) {
-
-                                    animationTriangle++;
-
-                                    updateImage("Char_Circulo", "CirculoSelecionado", animationTriangle, 4);
+                            if (animationCircleProcessed) {
+                                if (animationCircle < 32) {
+                                    animationCircle++;
+                                    updateImage("Char_Circulo", "CirculoSelecionado", animationCircle, 4);
                                 } else {
 
-                                    animationTriangleProcessed = false;
-                                    animationTriangle = 0;
+                                    animationCircleProcessed = false;
+                                    animationCircle = 0;
                                 }
                             } else {
-
-                                animationTriangleProcessed = true;
-                                animationTriangle = 0;
+                                animationCircleProcessed = false;
+                                animationCircle = 0;
                             }
-
-
                             Thread.sleep(50);
                         } catch (InterruptedException e) {
 
@@ -484,41 +436,43 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
                 }
 
             };
+
             Thread thread = new Thread(task);
             thread.setDaemon(true);
             thread.start();
              controllerPersonOneAnimation = false;
-        }
+
     }
     private void person2Animation() {
-        if (controllerPersonTwoAnimation == true) {
+        if (!controllerPersonTwoAnimation) {
+            return;
+        }
             Task<Void> task = new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
-                    while (controllerPersonFourAnimation) {
+                    while (controllerPersonTwoAnimation) {
                         try {
 
-                            if (animationTriangleProcessed) {
-                                if (animationTriangle < 57) {
+                            if (animationSquareProcessed) {
+                                if (animationSquare < 57) {
 
-                                    animationTriangle++;
+                                    animationSquare++;
 
                                     updateImage("Char_Quadrado", "QuadradoSelecionado", animationSquare, 2);
                                 } else {
 
-                                    animationTriangleProcessed = false;
-                                    animationTriangle = 0;
+                                    animationSquareProcessed = false;
+                                    animationSquare = 0;
                                 }
                             } else {
 
-                                animationTriangleProcessed = true;
-                                animationTriangle = 0;
+                                animationSquareProcessed = false;
+                                animationSquare = 0;
                             }
 
 
                             Thread.sleep(50);
                         } catch (InterruptedException e) {
-
                             Thread.currentThread().interrupt();
                             break;
                         }
@@ -530,32 +484,35 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
             Thread thread = new Thread(task);
             thread.setDaemon(true);
             thread.start();
-            controllerPersonTwoAnimation = false;
-        }
+
+
+        controllerPersonTwoAnimation = false;
     }
     private void person3Animation() {
-        if (controllerPersonThreeAnimation == true) {
+        if (!controllerPersonThreeAnimation) {
+            return;
+        }
             Task<Void> task = new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
-                    while (controllerPersonFourAnimation) {
+                    while (controllerPersonThreeAnimation) {
                         try {
 
-                            if (animationTriangleProcessed) {
-                                if (animationTriangle < 3) {
+                            if (animationLosangreProcessed) {
+                                if (animationLosangle < 3) {
 
-                                    animationTriangle++;
+                                    animationLosangle++;
 
                                     updateImage("Char_Losango", "Losango", animationLosangle, 3);
                                 } else {
 
-                                    animationTriangleProcessed = false;
-                                    animationTriangle = 0;
+                                    animationLosangreProcessed = false;
+                                    animationLosangle = 0;
                                 }
                             } else {
 
-                                animationTriangleProcessed = true;
-                                animationTriangle = 0;
+                                animationLosangreProcessed = true;
+                                animationLosangle = 0;
                             }
 
 
@@ -572,8 +529,9 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
             Thread thread = new Thread(task);
             thread.setDaemon(true);
             thread.start();
-             controllerPersonThreeAnimation = false;
-        }
+
+
+        animationLosangreProcessed = false;
     }
 
 
@@ -581,6 +539,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         if (!controllerPersonFourAnimation) {
             return;
         }
+
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() {
@@ -616,11 +575,10 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
                 return null;
             }
         };
-
-
         Thread thread = new Thread(task);
         thread.setDaemon(true);
         thread.start();
+        animationTriangleProcessed = false;
     }
 
 
