@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -15,6 +16,7 @@ import java.util.ResourceBundle;
 
 public class SceneOneController implements Controll, Initializable{
 
+    public static int movement = 1;
 
     @FXML
     public Text t_answer = new Text();
@@ -50,7 +52,7 @@ public class SceneOneController implements Controll, Initializable{
     public Button b_char4 = new Button();
 
     @FXML
-    public ImageView iv_enemy1 = new ImageView();
+    public ImageView iv_enemy = new ImageView();
 
     @FXML
     public Text t_level1 = new Text();
@@ -79,16 +81,45 @@ public class SceneOneController implements Controll, Initializable{
     @FXML
     public Pane p_level1 = new Pane();
 
+    @FXML
+    public AnchorPane ac_start = new AnchorPane();
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        TranslateTransition tt = new TranslateTransition();
-        tt.setNode(iv_enemy1);
-        tt.setDuration(Duration.millis(5000));
-        tt.setCycleCount(TranslateTransition.INDEFINITE);
-        tt.setFromX(75);
-        tt.setToX(-75);
-        tt.setAutoReverse(true);
-        tt.play();
+        switch(movement){
+            case 1:{
+                TranslateTransition tt = new TranslateTransition();
+                tt.setNode(iv_enemy);
+                tt.setDuration(Duration.millis(5000));
+                tt.setCycleCount(TranslateTransition.INDEFINITE);
+                tt.setFromX(75);
+                tt.setToX(-75);
+                tt.setAutoReverse(true);
+                tt.play();
+                break;
+            }
+            case 2:{
+                TranslateTransition tt = new TranslateTransition();
+                tt.setNode(iv_enemy);
+                tt.setDuration(Duration.millis(1000));
+                tt.setCycleCount(TranslateTransition.INDEFINITE);
+                tt.setFromY(75);
+                tt.setToY(-75);
+                tt.setAutoReverse(true);
+                tt.play();
+                break;
+            }
+            case 3:{
+                break;
+            }
+            case 4:{
+                break;
+            }
+            case 5:{
+                break;
+            }
+        }
+
     }
 }

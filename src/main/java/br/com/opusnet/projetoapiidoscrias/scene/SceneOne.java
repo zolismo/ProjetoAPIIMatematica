@@ -6,13 +6,16 @@ import br.com.opusnet.projetoapiidoscrias.model.LifeGame;
 import br.com.opusnet.projetoapiidoscrias.model.ScreemInterface;
 import br.com.opusnet.projetoapiidoscrias.util.Updatable;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
@@ -371,24 +374,35 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
                     Platform.runLater(()->{
                         gameLoop.stop();
                         System.out.println("Passou!!!!!");
-                        URL url = null;
-                        try {
-                            url = new File("src/main/resources/br/com/opusnet/projetoapiidoscrias/level2.fxml").toURI().toURL();
-                        } catch (MalformedURLException e) {
-                            throw new RuntimeException(e);
-                        }
-                        FXMLLoader fxmlLoader = new FXMLLoader();
-                        fxmlLoader.setLocation(url);
-                        //SceneTwoController sceneTwoController = fxmlLoader.getController();
-                        SceneTwo sceneTwo = null;
 
-                        try {
-                            sceneTwo = new SceneTwo(fxmlLoader.load(),stage,fxmlLoader.getController());
-                            stage.setScene(sceneTwo);
-                        } catch (IOException e) {
-                            System.out.println("IOExcepition");
-                            throw new RuntimeException(e);
-                        }
+                        FadeTransition ft = new FadeTransition();
+                        ft.setDuration(Duration.millis(1000));
+                        ft.setNode(controller.ac_start);
+                        ft.setFromValue(1.0);
+                        ft.setToValue(0.0);
+                        ft.setOnFinished((ActionEvent event) ->{
+                            URL url = null;
+                            try {
+                                url = new File("src/main/resources/br/com/opusnet/projetoapiidoscrias/level2.fxml").toURI().toURL();
+                            } catch (MalformedURLException e) {
+                                throw new RuntimeException(e);
+                            }
+                            FXMLLoader fxmlLoader = new FXMLLoader();
+                            fxmlLoader.setLocation(url);
+                            //SceneTwoController sceneTwoController = fxmlLoader.getController();
+                            SceneTwo sceneTwo = null;
+
+                            SceneOneController.movement = 2;
+
+                            try {
+                                sceneTwo = new SceneTwo(fxmlLoader.load(),stage,fxmlLoader.getController());
+                                stage.setScene(sceneTwo);
+                            } catch (IOException e) {
+                                System.out.println("IOExcepition");
+                                throw new RuntimeException(e);
+                            }
+                        });
+                        ft.play();
                     });
             }
 

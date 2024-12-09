@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 
 public class SceneTwoController implements Controll, Initializable {
 
+    public static int movement = 0;
 
     @FXML
     public Text t_answer = new Text();
@@ -50,7 +51,7 @@ public class SceneTwoController implements Controll, Initializable {
     public Button b_char4 = new Button();
 
     @FXML
-    public ImageView iv_enemy2 = new ImageView();
+    public ImageView iv_enemy = new ImageView();
 
     @FXML
     public Text t_level1 = new Text();
@@ -85,13 +86,30 @@ public class SceneTwoController implements Controll, Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        TranslateTransition tt = new TranslateTransition();
-        tt.setNode(iv_enemy2);
-        tt.setDuration(Duration.millis(1000));
-        tt.setCycleCount(TranslateTransition.INDEFINITE);
-        tt.setFromY(75);
-        tt.setToY(-75);
-        tt.setAutoReverse(true);
-        tt.play();
+        switch(movement){
+            case 0:{
+                TranslateTransition tt = new TranslateTransition();
+                tt.setNode(iv_enemy);
+                tt.setDuration(Duration.millis(1000));
+                tt.setCycleCount(TranslateTransition.INDEFINITE);
+                tt.setFromY(75);
+                tt.setToY(-75);
+                tt.setAutoReverse(true);
+                tt.play();
+                break;
+            }
+            case 1:{
+                break;
+            }
+            case 2:{
+                break;
+            }
+            case 3:{
+                break;
+            }
+            case 4:{
+                break;
+            }
+        }
     }
 }
