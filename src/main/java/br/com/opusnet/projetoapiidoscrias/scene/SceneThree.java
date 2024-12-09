@@ -7,8 +7,8 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
-public class SceneTree extends Scene implements Updatable, ScreemInterface {
-    public SceneTree(Parent root) {
+public class SceneThree extends Scene implements Updatable, ScreemInterface {
+    public SceneThree(Parent root) {
         super(root);
     }
 
