@@ -95,6 +95,12 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
 
     @Override
     public void render() {
+        person1Animation();
+        person2Animation();
+        person3Animation();
+        person4Animation();
+        animationEnime2();
+
         Platform.runLater(() -> {
             // animationBackground();
             atualizeLife();
@@ -102,10 +108,6 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
             //animationEnime();
             //animationTriangle();
             //animationCircle();
-            person1Animation();
-            person2Animation();
-            person3Animation();
-            person4Animation();
             // animationSquare();
             //animationLosangle();
 
@@ -174,7 +176,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
     private void animationCircle() {
         if (animationCircleProcessed && animationCircle < 33) {
             animationCircle++;
-            updateImage("Char_CirculoSelecionado", "Circulo", animationCircle, 1);
+            updateImage("Char_Circulo", "CirculoSelecionado", animationCircle, 1);
         } else if (animationCircle >= 33) {
             animationCircleProcessed = false;
             animationCircle = 0;
@@ -545,7 +547,30 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
             Task<Void> task = new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
+                    if (animationEnimeProcessed && animationEnime < 7) {
 
+                        String enimePath = String.format("src/main/resources/br/com/opusnet/projetoapiidoscrias/Enemy_Boss/Enemy_Boss" + animationEnime + ".png");
+                        animationEnime++;
+
+                        Image image = imageCache.get(enimePath);
+                        if (image == null) {
+                            File file = new File(enimePath);
+                            if (file.exists()) {
+                                image = new Image(file.toURI().toString());
+                                imageCache.put(enimePath, image);
+                                controller.iv_enemy1.setImage(image);
+                            } else {
+                                System.out.println("Imagem não encontrada: " + enimePath);
+                            }
+                        }
+
+                    } else if (animationEnime >= 7) {
+                        animationEnimeProcessed = false;
+                        animationEnime = 0;
+                    } else {
+                        animationEnimeProcessed = false;
+                        animationEnime = 0;
+                    }
 
                     return null;
                 }
