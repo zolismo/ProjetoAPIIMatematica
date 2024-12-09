@@ -35,6 +35,7 @@ public class HelloApplication extends Application {
             HomeScene homeScene = new HomeScene(root, stage,homeSceneControl);
 
      //       NavigatorScene.navigatorScene(stage, HomeScene.class,"start-screen.fxml"); l
+     //       NavigatorScene.navigatorScene(stage, HomeScene.class,"start-screen.fxml"); l
 
         }catch(IOException e){
             e.printStackTrace();
