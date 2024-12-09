@@ -73,4 +73,8 @@ public class SceneOneController implements Controll {
     @FXML
     public Pane p_level1 = new Pane();
 
+    @FXML
+    public ImageView  i_sky = new ImageView();
+
+
 }
