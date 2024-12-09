@@ -79,9 +79,6 @@ public class SceneOneController implements Controll, Initializable{
     @FXML
     public Pane p_level1 = new Pane();
 
-    @FXML
-    public ImageView  i_sky = new ImageView();
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
