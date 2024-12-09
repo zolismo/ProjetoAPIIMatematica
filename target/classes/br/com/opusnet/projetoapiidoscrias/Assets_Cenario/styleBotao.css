@@ -1,0 +1,14 @@
+.button{
+    -fx-background-image: url(Botao0.png);
+    -fx-background-size: contain;
+    //-fx-background-size: 125px 125px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-color: transparent; /* Remove o fundo do botão */
+    -fx-border-color: transparent;    /* Remove a borda */
+    -fx-padding: 0;
+}
+.my-button:hover {
+    -fx-scale-x: 1.2; /* Aumenta o tamanho horizontalmente */
+    -fx-scale-y: 1.2; /* Aumenta o tamanho verticalmente */
+}

@@ -58,6 +58,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         this.stage = stage;
         this.controller = controller;
         controller.t_equacao.setText(equacionEnime);
+        controller.t_life.setText("Vidas: " + String.valueOf(LifeGame.lifeGame));
 
 
         setValuesPerson();
@@ -82,11 +83,17 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         handleButtonPress();
         handlePersonSelect();
         checkAnswer();
+        verifyConfirm();
+        verifyDelet();
     }
 
+    private boolean modifyLife = false;
     @Override
     public void render() {
         Platform.runLater(() -> {
+            animationBackgroud();
+            atualizeLife();
+
             animationEnime();
             animationTriangle();
             animationCircle();
@@ -94,8 +101,8 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
             animationLosangle();
 
             if (LifeGame.lifeGame == 0) {
-                controller.t_level1.setVisible(true);
-                controller.t_level1.setText("Você perdeu");
+             //   controller.t_level1.setVisible(true);
+             //   controller.t_level1.setText("Você perdeu");
                 gameLoop.stop();
             }
 
@@ -107,6 +114,13 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
 
             moveEnime();
         });
+    }
+
+    public void atualizeLife(){
+        if (modifyLife == true){
+            controller.t_life.setText("Vidas: " + String.valueOf(LifeGame.lifeGame));
+            modifyLife = false;
+        }
     }
 
     private void animationSquare() {
@@ -291,14 +305,16 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
     private void moveEnime() {
         double enemyY = controller.iv_enemy1.getY();
 
-        if (sentinel && enemyY >= 50) sentinel = false;
+        if (sentinel && enemyY >= 10) sentinel = false;
         else if (!sentinel && enemyY <= -200) sentinel = true;
 
         controller.iv_enemy1.setY(enemyY + (sentinel ? 8 : -8));
     }
 
     public void checkAnswer() {
-        if (valueSelected[0] != 0 && valueSelected[1] != 0 && buttonPressed != 0) {
+        if (valueSelected[0] != 0 && valueSelected[1] != 0 && buttonPressed != 0 && confirm) {
+            confirm = false;
+            modifyLife = true;
             switch (buttonPressed) {
                 case 1 -> respostPerson = valueSelected[0] + valueSelected[1];
                 case 2 -> respostPerson = valueSelected[0] - valueSelected[1];
@@ -312,6 +328,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
             } else {
                 win = true;
             }
+
         }
     }
 
@@ -320,5 +337,65 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         valueSelected = new double[]{0, 0};
         buttonPressed = 0;
     }
+
+
+    private boolean verifyConfirmController = true;
+    private boolean confirm = false;
+    public void verifyConfirm(){
+        if(verifyConfirmController){
+            if(controller.b_confirm.isPressed()){
+                confirm = true;
+                verifyConfirmController = false;
+            }
+        }else{
+            verifyConfirmController = true;
+        }
+    }
+
+    private boolean verifyDeletController = true;
+    private boolean delet = false;
+    public void verifyDelet(){
+        if(verifyDeletController){
+            if(controller.b_delet.isPressed()){
+                delet = true;
+                verifyDeletController = false;
+            }
+        }else{
+            verifyDeletController = true;
+        }
+    }
+
+
+    private boolean skyAnimationProssed = true;
+    private int skyAnimation = 0;
+    public void animationBackgroud(){
+        if (skyAnimationProssed && skyAnimation < 21) {
+
+            String skyPath = String.format("src/main/resources/br/com/opusnet/projetoapiidoscrias/Ceu_Animacao/Ceu_Animado0"+ animationEnime + ".png");
+            animationEnime++;
+            Image image = imageCache.get(skyPath);
+            if (image == null) {
+                File file = new File(skyPath);
+                if (file.exists()) {
+                    ImageView imageView = new ImageView(image);
+                    image = new Image(file.toURI().toString());
+                    imageCache.put(skyPath, image);
+                    controller.p_level1.getChildren().add(imageView);
+                } else {
+                    System.out.println("Imagem não encontrada: " + skyPath);
+                }
+            }
+
+        } else if (skyAnimation >= 21) {
+            skyAnimationProssed = false;
+            skyAnimation = 0;
+        } else {
+            skyAnimationProssed = false;
+            skyAnimation = 0;
+        }
+
+
+    }
+
 
 }

@@ -4,9 +4,20 @@ import br.com.opusnet.projetoapiidoscrias.model.Controll;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class SceneOneController implements Controll {
+
+
+    @FXML
+    public Text t_answer = new Text();
+
+    @FXML
+    public Button b_confirm = new Button();
+
+    @FXML
+    public Button b_delet = new Button();
 
     @FXML
     public Button b_add = new Button();
@@ -56,5 +67,10 @@ public class SceneOneController implements Controll {
     @FXML
     public Text t_res4 = new Text();
 
+    @FXML
+    public Text t_life = new Text();
+
+    @FXML
+    public Pane p_level1 = new Pane();
 
 }
