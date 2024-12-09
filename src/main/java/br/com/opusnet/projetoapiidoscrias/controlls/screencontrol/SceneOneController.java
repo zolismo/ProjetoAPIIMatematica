@@ -1,14 +1,19 @@
 package br.com.opusnet.projetoapiidoscrias.controlls.screencontrol;
 
 import br.com.opusnet.projetoapiidoscrias.model.Controll;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
-public class SceneOneController implements Controll{
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class SceneOneController implements Controll, Initializable{
 
 
     @FXML
@@ -78,4 +83,15 @@ public class SceneOneController implements Controll{
     public ImageView  i_sky = new ImageView();
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        TranslateTransition tt = new TranslateTransition();
+        tt.setNode(iv_enemy1);
+        tt.setDuration(Duration.millis(5000));
+        tt.setCycleCount(TranslateTransition.INDEFINITE);
+        tt.setFromX(75);
+        tt.setToX(-75);
+        tt.setAutoReverse(true);
+        tt.play();
+    }
 }
