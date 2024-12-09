@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class SceneFourControll implements Controll {
+public class SceneFiveController implements Controll {
 
 
     @FXML
