@@ -28,7 +28,7 @@ public class HomeScene extends Scene implements Updatable, ScreemInterface {
         this.homeSceneControl = homeSceneControl;
         this.stage = stage;
 
-        InputStream stream = new FileInputStream("src/main/resources/br/com/opusnet/projetoapiidoscrias/Char_Quadrado.png");
+        InputStream stream = new FileInputStream("src/main/resources/br/com/opusnet/projetoapiidoscrias/Char_Quadrado/Char_QuadradoSelecionado00.png");
         Image icon = new Image(stream);
         stage.getIcons().add(icon);
 

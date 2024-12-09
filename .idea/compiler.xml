@@ -7,7 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ProjetoAPIIdosCrias" />
+        <module name="Ojogo" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ProjetoAPIIdosCrias" target="21" />
+    </bytecodeTargetLevel>
   </component>
 </project>
