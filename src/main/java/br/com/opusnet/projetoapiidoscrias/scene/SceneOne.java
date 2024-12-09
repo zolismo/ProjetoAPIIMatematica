@@ -369,7 +369,6 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
             System.out.println("Resposta calculada: " + respostPerson);
 
             if (respostPerson != valueEnime) {
-                gameLoop.stop();
                 LifeGame.lifeGame--;
                 resetGameState();
             } else {
@@ -400,9 +399,13 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
     }
 
     private void resetGameState() {
+        buttonSelected = "   ";
         respostPerson = 0;
-        valueSelected = new double[]{0, 0};
         buttonPressed = 0;
+        personSelectionProcessed = false;
+        buttonProcessed = false;
+        valueSelected = new double[]{0, 0};
+        verifyConfirmController = true;
     }
 
 
@@ -420,13 +423,14 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         }
     }
 
-    private boolean verifyDeletController = true;
-    private boolean delet = false;
 
+
+
+    private boolean verifyDeletController = true;
     public void verifyDelet() {
         if (verifyDeletController) {
             if (controller.b_delet.isPressed()) {
-                delet = true;
+                resetGameState();
                 verifyDeletController = false;
             }
         } else {
