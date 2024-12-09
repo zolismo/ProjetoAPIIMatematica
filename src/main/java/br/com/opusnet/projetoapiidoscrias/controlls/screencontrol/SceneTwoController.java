@@ -1,13 +1,19 @@
 package br.com.opusnet.projetoapiidoscrias.controlls.screencontrol;
 
 import br.com.opusnet.projetoapiidoscrias.model.Controll;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
-public class SceneTwoController implements Controll {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class SceneTwoController implements Controll, Initializable {
 
 
     @FXML
@@ -44,7 +50,7 @@ public class SceneTwoController implements Controll {
     public Button b_char4 = new Button();
 
     @FXML
-    public ImageView iv_enemy1 = new ImageView();
+    public ImageView iv_enemy2 = new ImageView();
 
     @FXML
     public Text t_level1 = new Text();
@@ -77,5 +83,15 @@ public class SceneTwoController implements Controll {
     public ImageView  i_sky = new ImageView();
 
 
-
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        TranslateTransition tt = new TranslateTransition();
+        tt.setNode(iv_enemy2);
+        tt.setDuration(Duration.millis(1000));
+        tt.setCycleCount(TranslateTransition.INDEFINITE);
+        tt.setFromY(75);
+        tt.setToY(-75);
+        tt.setAutoReverse(true);
+        tt.play();
+    }
 }
