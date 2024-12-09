@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -36,7 +37,7 @@
             <Button fx:id="b_mult" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" styleClass="my-button" stylesheets="@Botao_Operacoes/styleOperations.css" />
          </children>
       </HBox>
-      <StackPane prefHeight="406.0" prefWidth="1000.0" styleClass="stackpane" stylesheets="@Ceu_Animacao/styleCeu.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <StackPane prefHeight="406.0" prefWidth="1000.0" styleClass="stackpane" stylesheets="@Ceu_2/styleCeunoite.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="406.0" fitWidth="1000.0" pickOnBounds="true" />
             <Pane fx:id="p_level1" prefHeight="406.0" prefWidth="1000.0" styleClass="pane">
@@ -45,33 +46,33 @@
                   <Button fx:id="b_char2" layoutX="143.0" layoutY="359.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="52.0" styleClass="my-button" stylesheets="@Char_Quadrado/styleQuadrado.css" />
                   <Button fx:id="b_char3" layoutX="204.0" layoutY="359.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="52.0" styleClass="my-button" stylesheets="@Char_Losango/styleLosango.css" />
                   <Button fx:id="b_char4" layoutX="257.0" layoutY="359.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="52.0" styleClass="my-button" stylesheets="@Char_Triangulo/styleTriangulo.css" />
-                  <Text fx:id="t_life" layoutX="38.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MORRA IMEDIATAMENTE" wrappingWidth="159.99884033203125">
+                  <Text fx:id="t_life" fill="#ef0909" layoutX="38.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MORRA IMEDIATAMENTE" wrappingWidth="159.99884033203125">
                      <font>
                         <Font name="Pixelate Regular" size="18.0" />
                      </font>
                   </Text>
-                  <Text fx:id="t_res1" layoutX="94.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                  <Text fx:id="t_res1" fill="#e40f0f" layoutX="94.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                      <font>
                         <Font name="Pixelate Regular" size="12.0" />
                      </font></Text>
-                  <Text fx:id="t_res2" layoutX="158.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                  <Text fx:id="t_res2" fill="#df1414" layoutX="158.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                      <font>
                         <Font name="Pixelate Regular" size="12.0" />
                      </font></Text>
-                  <Text fx:id="t_res3" layoutX="219.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                  <Text fx:id="t_res3" fill="#df1717" layoutX="219.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                      <font>
                         <Font name="Pixelate Regular" size="12.0" />
                      </font></Text>
-                  <Text fx:id="t_res4" layoutX="272.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                  <Text fx:id="t_res4" fill="#ec1d1d" layoutX="272.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                      <font>
                         <Font name="Pixelate Regular" size="12.0" />
                      </font></Text>
-                  <Text fx:id="t_equacao" layoutX="351.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A equação pode aparecer aqui">
+                  <Text fx:id="t_equacao" fill="#ef0a0a" layoutX="351.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A equação pode aparecer aqui">
                      <font>
                         <Font name="Pixelate Regular" size="24.0" />
                      </font>
                   </Text>
-                  <Text fx:id="t_answer" layoutX="464.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="output">
+                  <Text fx:id="t_answer" fill="#ec0a0a" layoutX="464.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="output">
                      <font>
                         <Font name="Pixelate Regular" size="24.0" />
                      </font>
@@ -84,7 +85,10 @@
                      <font>
                         <Font name="Pixelate Regular" size="12.0" />
                      </font></Button>
-                  <ImageView fx:id="iv_enemy1" fitHeight="200.0" fitWidth="200.0" layoutX="750.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="iv_enemy5" fitHeight="250.0" fitWidth="290.0" layoutX="708.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Enemy_Boss/Enemy_Boss0.png" />
+                     </image></ImageView>
                </children>
             </Pane>
          </children>

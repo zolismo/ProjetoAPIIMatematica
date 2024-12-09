@@ -119,11 +119,10 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
 
 
         controller.b_char2.setOnMouseEntered((e) -> {
-            // Inicia a animação quando o mouse entra
             controllerPersonTwoAnimation = true;
-            animationSquareProcessed = true;  // Garante que a animação vai rodar desde o começo
+            animationSquareProcessed = true;
             animationSquare = 0;
-            startAnimationSquare();  // Chama a animação uma vez para iniciar a atualização
+            startAnimationSquare();
 
         });
 
@@ -141,7 +140,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         });
 
         controller.b_char3.setOnMouseExited((e) -> {
-            // Pausa a animação quando o mouse sai
+
             controllerPersonThreeAnimation = false;  // Interrompe a animação
             animationLosangreProcessed = false;  // Não incrementa mais o losango
         });
@@ -371,29 +370,31 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
             System.out.println("Resposta calculada: " + respostPerson);
 
             if (respostPerson != valueEnime) {
+                gameLoop.stop();
                 LifeGame.lifeGame--;
                 resetGameState();
             } else {
-                    System.out.println("Passou!!!!!");
-                    URL url = null;
-                    try {
-                        url = new File("src/main/resources/br/com/opusnet/projetoapiidoscrias/level1.fxml").toURI().toURL();
-                    } catch (MalformedURLException e) {
-                        throw new RuntimeException(e);
-                    }
-                    gameLoop.stop();
-                    FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(url);
-                     SceneTwoController sceneTwoController = fxmlLoader.getController();
-                    SceneTwo sceneTwo = null;
+                    Platform.runLater(()->{
+                        gameLoop.stop();
+                        System.out.println("Passou!!!!!");
+                        URL url = null;
+                        try {
+                            url = new File("src/main/resources/br/com/opusnet/projetoapiidoscrias/level2.fxml").toURI().toURL();
+                        } catch (MalformedURLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        fxmlLoader.setLocation(url);
+                        //SceneTwoController sceneTwoController = fxmlLoader.getController();
+                        SceneTwo sceneTwo = null;
 
-                    try {
-                        sceneTwo = new SceneTwo(fxmlLoader.load(),stage,fxmlLoader.getController());
-                        stage.setScene(sceneTwo);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-
+                        try {
+                            sceneTwo = new SceneTwo(fxmlLoader.load(),stage,fxmlLoader.getController());
+                            stage.setScene(sceneTwo);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
             }
 
         }
