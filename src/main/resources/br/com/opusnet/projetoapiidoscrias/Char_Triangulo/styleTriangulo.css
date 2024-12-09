@@ -1,0 +1,9 @@
+#b_char4{
+    -fx-background-image: url(Char_TrianguloSelecionado00.png);
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-color: transparent; /* Remove o fundo do botão */
+    -fx-border-color: transparent;    /* Remove a borda */
+    -fx-padding: 0;
+}
