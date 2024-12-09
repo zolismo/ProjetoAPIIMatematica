@@ -6,13 +6,16 @@ import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.SceneOneContro
 import br.com.opusnet.projetoapiidoscrias.model.ScreemInterface;
 import br.com.opusnet.projetoapiidoscrias.util.NavigatorScene;
 import br.com.opusnet.projetoapiidoscrias.util.Updatable;
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -47,24 +50,34 @@ public class HomeScene extends Scene implements Updatable, ScreemInterface {
 
             if (homeSceneControl.b_newgame.isPressed()) {
 
-                URL url = null;
-                try {
-                    url = new File("src/main/resources/br/com/opusnet/projetoapiidoscrias/level1.fxml").toURI().toURL();
-                } catch (MalformedURLException e) {
-                    throw new RuntimeException(e);
-                }
-                gameLoop.stop();
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(url);
-              //  SceneOneController sceneOneController = fxmlLoader.getController();
-                SceneOne sceneOne = null;
+                FadeTransition ft = new FadeTransition();
+                ft.setDuration(Duration.millis(1000));
+                ft.setNode(homeSceneControl.ac_start);
+                ft.setFromValue(1.0);
+                ft.setToValue(0.0);
+                ft.setOnFinished((ActionEvent event) ->{
+                    URL url = null;
+                    try {
+                        url = new File("src/main/resources/br/com/opusnet/projetoapiidoscrias/level1.fxml").toURI().toURL();
+                    } catch (MalformedURLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    gameLoop.stop();
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(url);
+                    //  SceneOneController sceneOneController = fxmlLoader.getController();
+                    SceneOne sceneOne = null;
 
-                try {
-                    sceneOne = new SceneOne(fxmlLoader.load(),stage,fxmlLoader.getController());
-                    stage.setScene(sceneOne);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                    try {
+                        sceneOne = new SceneOne(fxmlLoader.load(),stage,fxmlLoader.getController());
+                        stage.setScene(sceneOne);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+                ft.play();
+
+
 
             }
         });

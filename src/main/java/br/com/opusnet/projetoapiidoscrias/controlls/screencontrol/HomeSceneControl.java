@@ -4,6 +4,7 @@ import br.com.opusnet.projetoapiidoscrias.model.Controll;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class HomeSceneControl implements Controll {
@@ -12,6 +13,9 @@ public class HomeSceneControl implements Controll {
 
     @FXML
     public Button b_quit = new Button();
+
+    @FXML
+    public AnchorPane ac_start = new AnchorPane();
 
     @FXML
     public void initialize() {
