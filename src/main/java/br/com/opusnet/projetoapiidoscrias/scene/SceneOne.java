@@ -2,15 +2,19 @@ package br.com.opusnet.projetoapiidoscrias.scene;
 
 import br.com.opusnet.projetoapiidoscrias.controlls.GameLoop;
 import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.SceneOneController;
+import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.SceneTwoController;
 import br.com.opusnet.projetoapiidoscrias.model.LifeGame;
 import br.com.opusnet.projetoapiidoscrias.model.ScreemInterface;
 import br.com.opusnet.projetoapiidoscrias.util.Updatable;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -19,6 +23,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -28,17 +35,21 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
     private final SceneOneController controller;
     private final Stage stage;
 
+    private boolean controllerPersonOneAnimation = true;
+    private boolean controllerPersonTwoAnimation = true;
+    private boolean controllerPersonThreeAnimation = true;
+    private boolean controllerPersonFourAnimation = true;
+
     private double valueEnime = 250;
     private final String equacionEnime = "x² - 500x + 62500 = 0";
     private double respostPerson;
     private double[] valueSelected = {0, 0};
     private int buttonPressed = 0;
-    private boolean win = false;
-    private boolean sentinel = true;
+
+
 
     private boolean animationTriangleProcessed = true;
     private int animationTriangle = 0;
-    private Image imageTriangle;
 
     private boolean animationLosangreProcessed = true;
     private int animationLosangle = 0;
@@ -65,7 +76,6 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         controller.t_equacao.setText(equacionEnime);
         controller.t_life.setText("Vidas: " + String.valueOf(LifeGame.lifeGame));
 
-
         setValuesPerson();
         controller.t_equacao.setText(equacionEnime);
         gameLoop = new GameLoop(this);
@@ -84,7 +94,6 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         System.out.println("Value 1: " + valueSelected[0]);
         System.out.println("Value 2: " + valueSelected[1]);
         System.out.println("Button Pressed: " + buttonPressed);
-        System.out.println("Resposta calculada: " + respostPerson);
         handleButtonPress();
         handlePersonSelect();
         checkAnswer();
@@ -96,27 +105,122 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
 
     @Override
     public void render() {
-        person1Animation();
-        person2Animation();
-        person3Animation();
-        person4Animation();
+        controller.b_char1.setOnMouseEntered((e) -> {
+            controllerPersonOneAnimation = true;
+            animationCircleProcessed = true;
+            animationCircle = 0;
+            startAnimationCircle();
+        });
+
+        controller.b_char1.setOnMouseExited((e) -> {
+            controllerPersonOneAnimation = false;
+            animationCircleProcessed = false;
+        });
+
+
+        controller.b_char2.setOnMouseEntered((e) -> {
+            // Inicia a animação quando o mouse entra
+            controllerPersonTwoAnimation = true;
+            animationSquareProcessed = true;  // Garante que a animação vai rodar desde o começo
+            animationSquare = 0;
+            startAnimationSquare();  // Chama a animação uma vez para iniciar a atualização
+
+        });
+
+        controller.b_char2.setOnMouseExited((e) -> {
+            controllerPersonTwoAnimation = false;
+            animationSquareProcessed = false;
+        });
+
+        controller.b_char3.setOnMouseEntered((e) -> {
+            // Inicia a animação quando o mouse entra
+            controllerPersonThreeAnimation = true;
+            animationLosangreProcessed = true;
+            animationLosangle = 0;
+            startAnimationLosangle();
+        });
+
+        controller.b_char3.setOnMouseExited((e) -> {
+            // Pausa a animação quando o mouse sai
+            controllerPersonThreeAnimation = false;  // Interrompe a animação
+            animationLosangreProcessed = false;  // Não incrementa mais o losango
+        });
+
+        controller.b_char4.setOnMouseEntered((e) -> {
+
+            controllerPersonThreeAnimation = true;
+            animationLosangreProcessed = true;
+            animationLosangle = 0;
+            startAnimationTriangle();
+        });
+
+        controller.b_char4.setOnMouseExited((e) -> {
+
+            controllerPersonThreeAnimation = false;
+            animationLosangreProcessed = false;
+        });
+
         atualizeLife();
-        animationCircle();
 
 
         if (LifeGame.lifeGame == 0) {
-                //   controller.t_level1.setVisible(true);
-                //   controller.t_level1.setText("Você perdeu");
-                gameLoop.stop();
-            }
+            //   controller.t_level1.setVisible(true);
+            //   controller.t_level1.setText("Você perdeu");
+            gameLoop.stop();
+        }
 
-            if (win) {
-                controller.t_level1.setVisible(true);
-                controller.t_level1.setText("Você ganhou");
-                gameLoop.stop();
-            }
-            moveEnime();
+
     }
+    private void startAnimationCircle() {
+        new Thread(() -> {
+            while (controllerPersonOneAnimation) {
+                person1Animation();
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();                  }
+            }
+        }).start();
+    }
+
+    private void startAnimationSquare() {
+        new Thread(() -> {
+            while (controllerPersonTwoAnimation) {
+                person2Animation();
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }).start();
+    }
+    private void startAnimationLosangle() {
+        new Thread(() -> {
+            while (controllerPersonThreeAnimation) {
+                person3Animation();
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }).start();
+    }
+    private void startAnimationTriangle() {
+        new Thread(() -> {
+            while (controllerPersonFourAnimation) {
+                person4Animation();
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }).start();
+    }
+
+
 
     public void atualizeLife() {
         if (modifyLife == true) {
@@ -144,47 +248,20 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         return image;
     }
 
-
-
-    private void animationCircle() {
-        if (animationCircleProcessed && animationCircle < 33) {
-            animationCircle++;
-            updateImage("Char_Circulo", "CirculoSelecionado", animationCircle, 1);
-        } else if (animationCircle >= 33) {
-            animationCircleProcessed = false;
-            animationCircle = 0;
-        } else {
-            animationCircleProcessed = true;
-            animationCircle = 0;
-        }
-    }
-
-    private void animationEnime() {
-        if (animationEnimeProcessed && animationEnime < 7) {
-
-            String enimePath = String.format("src/main/resources/br/com/opusnet/projetoapiidoscrias/Enemy_Boss/Enemy_Boss" + animationEnime + ".png");
-            animationEnime++;
-
-            Image image = imageCache.get(enimePath);
-            if (image == null) {
-                File file = new File(enimePath);
-                if (file.exists()) {
-                    image = new Image(file.toURI().toString());
-                    imageCache.put(enimePath, image);
-                    controller.iv_enemy1.setImage(image);
+    private void person3Animation() {
+        if (controllerPersonThreeAnimation) {
+            if (animationLosangreProcessed) {
+                if (animationLosangle < 3) {
+                    animationLosangle++;
+                    updateImage("Char_Losango", "Losango", animationLosangle, 3);
                 } else {
-                    System.out.println("Imagem não encontrada: " + enimePath);
+                    animationLosangreProcessed = false;
+                    animationLosangle = 0;
                 }
             }
-
-        } else if (animationEnime >= 7) {
-            animationEnimeProcessed = false;
-            animationEnime = 0;
-        } else {
-            animationEnimeProcessed = false;
-            animationEnime = 0;
         }
     }
+
 
     private void updateImage(String folder, String name, int index, int botao) {
 
@@ -246,7 +323,6 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
             }
         }
 
-        // Reseta o estado de 'buttonProcessed' se nenhum botão de operação estiver pressionado
         if (!controller.b_add.isPressed() && !controller.b_sub.isPressed() && !controller.b_mult.isPressed() && !controller.b_div.isPressed()) {
             buttonProcessed = false;
         }
@@ -255,8 +331,9 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
     private void handlePersonSelect() {
         if (!personSelectionProcessed) {
             if (controller.b_char1.isPressed()) {
+                System.out.println("Pessoa1Selecionada");
                 setSelection(Double.parseDouble(controller.t_res1.getText()));
-                personSelectionProcessed = true;  // Marca que a seleção foi processada
+                personSelectionProcessed = true;
             } else if (controller.b_char2.isPressed()) {
                 setSelection(Double.parseDouble(controller.t_res2.getText()));
                 personSelectionProcessed = true;
@@ -279,17 +356,10 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         else if (valueSelected[1] == 0) valueSelected[1] = value;
     }
 
-    private void moveEnime() {
-        double enemyY = controller.iv_enemy1.getY();
-
-        if (sentinel && enemyY >= 10) sentinel = false;
-        else if (!sentinel && enemyY <= -200) sentinel = true;
-
-        controller.iv_enemy1.setY(enemyY + (sentinel ? 8 : -8));
-    }
 
     public void checkAnswer() {
         if (valueSelected[0] != 0 && valueSelected[1] != 0 && buttonPressed != 0 && confirm) {
+            System.out.println("bifewbfilweqol");
             confirm = false;
             modifyLife = true;
             switch (buttonPressed) {
@@ -298,12 +368,32 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
                 case 3 -> respostPerson = valueSelected[0] * valueSelected[1];
                 case 4 -> respostPerson = valueSelected[0] / valueSelected[1];
             }
+            System.out.println("Resposta calculada: " + respostPerson);
 
             if (respostPerson != valueEnime) {
                 LifeGame.lifeGame--;
                 resetGameState();
             } else {
-                win = true;
+                    System.out.println("Passou!!!!!");
+                    URL url = null;
+                    try {
+                        url = new File("src/main/resources/br/com/opusnet/projetoapiidoscrias/level1.fxml").toURI().toURL();
+                    } catch (MalformedURLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    gameLoop.stop();
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(url);
+                     SceneTwoController sceneTwoController = fxmlLoader.getController();
+                    SceneTwo sceneTwo = null;
+
+                    try {
+                        sceneTwo = new SceneTwo(fxmlLoader.load(),stage,fxmlLoader.getController());
+                        stage.setScene(sceneTwo);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
             }
 
         }
@@ -344,242 +434,53 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         }
     }
 
-/*
-    private boolean skyAnimationProssed = true;
-    private int skyAnimation = 0;
 
-    public void animationBackground() {
-
-        if (skyAnimationProssed && skyAnimation < 21) {
-
-            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(20), event -> {
-                animationSkyFrames();
-            }));
-                timeline.play();
-                timeline.setCycleCount(Timeline.INDEFINITE);
-
-
-        } else if (skyAnimation >= 21) {
-            skyAnimationProssed = false;
-            skyAnimation = 0;
-        } else {
-            skyAnimationProssed = true;
-            skyAnimation = 0;
-        }
-
-    }
-
-    public void animationSkyFrames(){
-        String skyPath;
-        if(skyAnimation<10)
-            skyPath = String.format("src/main/resources/br/com/opusnet/projetoapiidoscrias/Ceu_Animacao/Ceu_Animado0" + skyAnimation + ".png");
-        else
-            skyPath = String.format("src/main/resources/br/com/opusnet/projetoapiidoscrias/Ceu_Animacao/Ceu_Animado" + skyAnimation + ".png");
-
-        skyAnimation++;
-
-        Image image = imageCache.get(skyPath);
-        if (image == null) {
-            File file = new File(skyPath);
-            if (file.exists()) {
-                image = new Image(file.toURI().toString());
-                imageCache.put(skyPath, image);
-            } else {
-                System.out.println("Imagem não encontrada: " + skyPath);
-                return;
-            }
-        }
-
-        controller.i_sky.setImage(image);
-        controller.i_sky.setFitWidth(controller.p_level1.getWidth());
-        controller.i_sky.setFitHeight(controller.p_level1.getHeight());
-        controller.i_sky.setPreserveRatio(false);
-    }
-
- */
-
-    private boolean controllerPersonOneAnimation = true;
-    private boolean controllerPersonTwoAnimation = true;
-    private boolean controllerPersonThreeAnimation = true;
-    private boolean controllerPersonFourAnimation = true;
 
     private void person1Animation() {
-        if (!controllerPersonOneAnimation) {
-                return;
-        }
-            Task<Void> task = new Task<Void>() {
-                @Override
-                protected Void call() throws Exception {
-                    while (controllerPersonOneAnimation) {
-                        try {
-                            if (animationCircleProcessed) {
-                                if (animationCircle < 32) {
-                                    animationCircle++;
-                                    updateImage("Char_Circulo", "CirculoSelecionado", animationCircle, 4);
-                                } else {
-
-                                    animationCircleProcessed = false;
-                                    animationCircle = 0;
-                                }
-                            } else {
-                                animationCircleProcessed = false;
-                                animationCircle = 0;
-                            }
-                            Thread.sleep(50);
-                        } catch (InterruptedException e) {
-
-                            Thread.currentThread().interrupt();
-                            break;
-                        }
-                    }
-                    return null;
+        if (controllerPersonOneAnimation) {
+            if (animationCircleProcessed) {
+                if (animationCircle < 32) {
+                    animationCircle++;
+                    updateImage("Char_Circulo", "CirculoSelecionado", animationCircle, 1);
+                } else {
+                    animationCircleProcessed = false;
+                    animationCircle = 0;
                 }
-
-            };
-
-            Thread thread = new Thread(task);
-            thread.setDaemon(true);
-            thread.start();
-             controllerPersonOneAnimation = false;
-
+            }
+        }
     }
     private void person2Animation() {
-        if (!controllerPersonTwoAnimation) {
-            return;
-        }
-            Task<Void> task = new Task<Void>() {
-                @Override
-                protected Void call() throws Exception {
-                    while (controllerPersonTwoAnimation) {
-                        try {
-
-                            if (animationSquareProcessed) {
-                                if (animationSquare < 57) {
-
-                                    animationSquare++;
-
-                                    updateImage("Char_Quadrado", "QuadradoSelecionado", animationSquare, 2);
-                                } else {
-
-                                    animationSquareProcessed = false;
-                                    animationSquare = 0;
-                                }
-                            } else {
-
-                                animationSquareProcessed = false;
-                                animationSquare = 0;
-                            }
-
-
-                            Thread.sleep(50);
-                        } catch (InterruptedException e) {
-                            Thread.currentThread().interrupt();
-                            break;
-                        }
-                    }
-                    return null;
+        if (controllerPersonTwoAnimation) {
+            if (animationSquareProcessed) {
+                if (animationSquare < 57) {
+                    animationSquare++;
+                    updateImage("Char_Quadrado", "QuadradoSelecionado", animationSquare, 2);
+                } else {
+                    animationSquareProcessed = false;
+                    animationSquare = 0;
                 }
-
-            };
-            Thread thread = new Thread(task);
-            thread.setDaemon(true);
-            thread.start();
-
-
-        controllerPersonTwoAnimation = false;
-    }
-    private void person3Animation() {
-        if (!controllerPersonThreeAnimation) {
-            return;
+            }
         }
-            Task<Void> task = new Task<Void>() {
-                @Override
-                protected Void call() throws Exception {
-                    while (controllerPersonThreeAnimation) {
-                        try {
-
-                            if (animationLosangreProcessed) {
-                                if (animationLosangle < 3) {
-
-                                    animationLosangle++;
-
-                                    updateImage("Char_Losango", "Losango", animationLosangle, 3);
-                                } else {
-
-                                    animationLosangreProcessed = false;
-                                    animationLosangle = 0;
-                                }
-                            } else {
-
-                                animationLosangreProcessed = true;
-                                animationLosangle = 0;
-                            }
-
-
-                            Thread.sleep(50);
-                        } catch (InterruptedException e) {
-
-                            Thread.currentThread().interrupt();
-                            break;
-                        }
-                    }
-                    return null;
-                }
-            };
-            Thread thread = new Thread(task);
-            thread.setDaemon(true);
-            thread.start();
-
-
-        animationLosangreProcessed = false;
     }
 
 
     private void person4Animation() {
-        if (!controllerPersonFourAnimation) {
-            return;
-        }
-
-        Task<Void> task = new Task<>() {
-            @Override
-            protected Void call() {
-
-                while (controllerPersonFourAnimation) {
-                    try {
-
-                        if (animationTriangleProcessed) {
-                            if (animationTriangle < 29) {
-
-                                animationTriangle++;
-
-                                updateImage("Char_Triangulo", "TrianguloSelecionado", animationTriangle, 4);
-                            } else {
-
-                                animationTriangleProcessed = false;
-                                animationTriangle = 0;
-                            }
-                        } else {
-
-                            animationTriangleProcessed = true;
-                            animationTriangle = 0;
-                        }
-
-
-                        Thread.sleep(50);
-                    } catch (InterruptedException e) {
-
-                        Thread.currentThread().interrupt();
-                        break;
-                    }
+        if (controllerPersonFourAnimation) {
+            if (animationTriangleProcessed) {
+                if (animationTriangle < 29) {
+                    animationTriangle++;
+                    updateImage("Char_Triangulo", "TrianguloSelecionado", animationTriangle, 4);
+                } else {
+                    animationTriangleProcessed = false;
+                    animationTriangle = 0;
                 }
-                return null;
             }
-        };
-        Thread thread = new Thread(task);
-        thread.setDaemon(true);
-        thread.start();
-        animationTriangleProcessed = false;
+        }
     }
+
+
+
+
 
 
     private boolean controllerEnimeAnimation = true;
