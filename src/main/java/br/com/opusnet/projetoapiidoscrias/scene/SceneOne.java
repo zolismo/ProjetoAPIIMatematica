@@ -7,6 +7,7 @@ import br.com.opusnet.projetoapiidoscrias.model.ScreemInterface;
 import br.com.opusnet.projetoapiidoscrias.util.Updatable;
 
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -99,7 +100,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         person2Animation();
         person3Animation();
         person4Animation();
-        animationEnime2();
+    //    animationEnime2();
 
         Platform.runLater(() -> {
             // animationBackground();
@@ -107,7 +108,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
 
             //animationEnime();
             //animationTriangle();
-            //animationCircle();
+            animationCircle();
             // animationSquare();
             //animationLosangle();
 
@@ -215,7 +216,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
 
 
     private void updateImage(String folder, String name, int index, int botao) {
-
+        
         String imagePath = String.format("src/main/resources/br/com/opusnet/projetoapiidoscrias/%s/Char_%s%02d.png", folder, name, index);
 
         Image image = imageCache.get(imagePath);
@@ -235,6 +236,8 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         imageView.setFitHeight(50);
 
         Platform.runLater(()->{
+
+
             switch (botao) {
                 case 1:
                     if (controller.b_char1 != null) {
@@ -260,7 +263,13 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
                         controller.b_char4.setGraphic(imageView);
                     }
                     break;
+
+
+
             }
+
+
+
         });
     }
 
@@ -434,111 +443,186 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
  */
 
     private boolean controllerPersonOneAnimation = true;
+    private boolean controllerPersonTwoAnimation = true;
+    private boolean controllerPersonThreeAnimation = true;
+    private boolean controllerPersonFourAnimation = true;
+
     private void person1Animation() {
         if (controllerPersonOneAnimation == true) {
             Task<Void> task = new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
-                    if (animationCircleProcessed && animationCircle < 33) {
-                        animationCircle++;
-                        updateImage("Char_CirculoSelecionado", "Circulo", animationCircle, 1);
-                    } else if (animationCircle >= 33) {
-                        animationCircleProcessed = false;
-                        animationCircle = 0;
-                    } else {
-                        animationCircleProcessed = true;
-                        animationCircle = 0;
+                    while (controllerPersonFourAnimation) {
+                        try {
+
+                            if (animationTriangleProcessed) {
+                                if (animationTriangle < 32) {
+
+                                    animationTriangle++;
+
+                                    updateImage("Char_Circulo", "CirculoSelecionado", animationTriangle, 4);
+                                } else {
+
+                                    animationTriangleProcessed = false;
+                                    animationTriangle = 0;
+                                }
+                            } else {
+
+                                animationTriangleProcessed = true;
+                                animationTriangle = 0;
+                            }
+
+
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+
+                            Thread.currentThread().interrupt();
+                            break;
+                        }
                     }
                     return null;
-
                 }
 
             };
             Thread thread = new Thread(task);
             thread.setDaemon(true);
             thread.start();
-            // controllerPersonOneAnimation = false;
+             controllerPersonOneAnimation = false;
         }
     }
     private void person2Animation() {
-        if (controllerPersonOneAnimation == true) {
+        if (controllerPersonTwoAnimation == true) {
             Task<Void> task = new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
-                    if (animationSquareProcessed && animationSquare < 58) {
-                        animationSquare++;
-                        updateImage("Char_Quadrado", "QuadradoSelecionado", animationSquare, 2);
-                    } else if (animationSquare >= 30) {
-                        animationSquareProcessed = false;
-                        animationSquare = 0;
-                    } else {
-                        animationSquareProcessed = true;
-                        animationSquare = 0;
+                    while (controllerPersonFourAnimation) {
+                        try {
+
+                            if (animationTriangleProcessed) {
+                                if (animationTriangle < 57) {
+
+                                    animationTriangle++;
+
+                                    updateImage("Char_Quadrado", "QuadradoSelecionado", animationSquare, 2);
+                                } else {
+
+                                    animationTriangleProcessed = false;
+                                    animationTriangle = 0;
+                                }
+                            } else {
+
+                                animationTriangleProcessed = true;
+                                animationTriangle = 0;
+                            }
+
+
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+
+                            Thread.currentThread().interrupt();
+                            break;
+                        }
                     }
                     return null;
-
                 }
 
             };
             Thread thread = new Thread(task);
             thread.setDaemon(true);
             thread.start();
-            // controllerPersonOneAnimation = false;
+            controllerPersonTwoAnimation = false;
         }
     }
     private void person3Animation() {
-        if (controllerPersonOneAnimation == true) {
+        if (controllerPersonThreeAnimation == true) {
             Task<Void> task = new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
-                    if (animationLosangreProcessed && animationLosangle < 3) {
-                        animationLosangle++;
+                    while (controllerPersonFourAnimation) {
+                        try {
 
-                        updateImage("Char_LosangoSelecionado", "Losango", animationLosangle, 3);
-                    } else if (animationLosangle >= 30) {
-                        animationLosangreProcessed = false;
-                        animationLosangle = 0;
-                    } else {
-                        animationLosangreProcessed = true;
-                        animationLosangle = 0;
+                            if (animationTriangleProcessed) {
+                                if (animationTriangle < 3) {
+
+                                    animationTriangle++;
+
+                                    updateImage("Char_Losango", "Losango", animationLosangle, 3);
+                                } else {
+
+                                    animationTriangleProcessed = false;
+                                    animationTriangle = 0;
+                                }
+                            } else {
+
+                                animationTriangleProcessed = true;
+                                animationTriangle = 0;
+                            }
+
+
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+
+                            Thread.currentThread().interrupt();
+                            break;
+                        }
                     }
                     return null;
-
                 }
-
             };
             Thread thread = new Thread(task);
             thread.setDaemon(true);
             thread.start();
-            // controllerPersonOneAnimation = false;
+             controllerPersonThreeAnimation = false;
         }
     }
+
+
     private void person4Animation() {
-        if (controllerPersonOneAnimation == true) {
-            Task<Void> task = new Task<Void>() {
-                @Override
-                protected Void call() throws Exception {
-                    if (animationTriangleProcessed && animationTriangle < 30) {
-                        animationTriangle++;
-                        updateImage("Char_Triangulo", "TrianguloSelecionado", animationTriangle, 4);
-                    } else if (animationTriangle >= 30) {
-                        animationTriangleProcessed = false;
-                        animationTriangle = 0;
-                    } else {
-                        animationTriangleProcessed = true;
-                        animationTriangle = 0;
-                    }
-                    return null;
-
-                }
-
-            };
-            Thread thread = new Thread(task);
-            thread.setDaemon(true);
-            thread.start();
-            // controllerPersonOneAnimation = false;
+        if (!controllerPersonFourAnimation) {
+            return;
         }
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() {
+
+                while (controllerPersonFourAnimation) {
+                    try {
+
+                        if (animationTriangleProcessed) {
+                            if (animationTriangle < 29) {
+
+                                animationTriangle++;
+
+                                updateImage("Char_Triangulo", "TrianguloSelecionado", animationTriangle, 4);
+                            } else {
+
+                                animationTriangleProcessed = false;
+                                animationTriangle = 0;
+                            }
+                        } else {
+
+                            animationTriangleProcessed = true;
+                            animationTriangle = 0;
+                        }
+
+
+                        Thread.sleep(50);
+                    } catch (InterruptedException e) {
+
+                        Thread.currentThread().interrupt();
+                        break;
+                    }
+                }
+                return null;
+            }
+        };
+
+
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
     }
+
 
     private boolean controllerEnimeAnimation = true;
 
