@@ -5,7 +5,6 @@ import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.SceneOneContro
 import br.com.opusnet.projetoapiidoscrias.model.LifeGame;
 import br.com.opusnet.projetoapiidoscrias.model.ScreemInterface;
 import br.com.opusnet.projetoapiidoscrias.util.Updatable;
-
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,69 +14,69 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SceneOne extends Scene implements Updatable, ScreemInterface {
-    private final GameLoop gameLoop;
-    private final SceneOneController controller;
-    private final Stage stage;
+public abstract class AbstractScene extends Scene implements Updatable, ScreemInterface {
+    protected GameLoop gameLoop = new GameLoop();
+    protected final SceneOneController controller;
+    protected final Stage stage;
 
-    private boolean controllerPersonOneAnimation = true;
-    private boolean controllerPersonTwoAnimation = true;
-    private boolean controllerPersonThreeAnimation = true;
-    private boolean controllerPersonFourAnimation = true;
+    protected boolean controllerPersonOneAnimation = true;
+    protected boolean controllerPersonTwoAnimation = true;
+    protected boolean controllerPersonThreeAnimation = true;
+    protected boolean controllerPersonFourAnimation = true;
 
-    private double valueEnime = 250;
-    private final String equacionEnime = "x² - 500x + 62500 = 0";
-    private double respostPerson;
-    private double[] valueSelected = {0, 0};
-    private int buttonPressed = 0;
+    protected double valueEnime;
+    protected final String equacionEnime;
+    protected double respostPerson;
+    protected double[] valueSelected = {0, 0};
+    protected int buttonPressed = 0;
 
-    private String buttonSelected = "     ";
+    protected String buttonSelected = "     ";
 
+    protected boolean animationTriangleProcessed = true;
+    protected int animationTriangle = 0;
 
+    protected boolean animationLosangreProcessed = true;
+    protected int animationLosangle = 0;
 
-    private boolean animationTriangleProcessed = true;
-    private int animationTriangle = 0;
+    protected boolean animationSquareProcessed = true;
+    protected int animationSquare = 0;
 
-    private boolean animationLosangreProcessed = true;
-    private int animationLosangle = 0;
-
-    private boolean animationSquareProcessed = true;
-    private int animationSquare = 0;
-
-    private boolean animationCircleProcessed = true;
-    private int animationCircle = 0;
+    protected boolean animationCircleProcessed = true;
+    protected int animationCircle = 0;
 
 
-    private boolean buttonProcessed = false;
-    private boolean personSelectionProcessed = false;
+    protected boolean buttonProcessed = false;
+    protected boolean personSelectionProcessed = false;
+    private String path;
 
-    private Map<String, Image> imageCache = new HashMap<>();
 
-    public SceneOne(Parent root, Stage stage, SceneOneController controller) {
+    protected Map<String, Image> imageCache = new HashMap<>();
+
+    public AbstractScene(Parent root, Stage stage, SceneOneController controller, String equacionEnime, double valueEnime, String value1,String value2,String value3,String value4) {
         super(root);
+        this.path = path;
         this.stage = stage;
         this.controller = controller;
+        this.equacionEnime = equacionEnime;
+        this.valueEnime = valueEnime;
 
         controller.t_equacao.setText(equacionEnime);
         controller.t_life.setText("Vidas: " + String.valueOf(LifeGame.lifeGame));
 
-        setValuesPerson();
+        setValuesPerson(value1,value2,value3,value4);
         controller.t_equacao.setText(equacionEnime);
         gameLoop = new GameLoop(this);
         new Thread(gameLoop).start();
     }
 
-    public void setValuesPerson() {
-        controller.t_res1.setText("200");
-        controller.t_res2.setText("90");
-        controller.t_res3.setText("50");
-        controller.t_res4.setText("20");
+    protected void setValuesPerson(String value1, String value2,String value3,String value4) {
+        controller.t_res1.setText(value1);
+        controller.t_res2.setText(value2);
+        controller.t_res3.setText(value3);
+        controller.t_res4.setText(value4);
     }
 
     @Override
@@ -92,7 +91,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         verifyDelet();
     }
 
-    private boolean modifyLife = false;
+    protected boolean modifyLife = false;
 
     @Override
     public void render() {
@@ -161,7 +160,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
 
 
     }
-    private void startAnimationCircle() {
+    protected void startAnimationCircle() {
         new Thread(() -> {
             while (controllerPersonOneAnimation) {
                 person1Animation();
@@ -173,7 +172,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         }).start();
     }
 
-    private void startAnimationSquare() {
+    protected void startAnimationSquare() {
         new Thread(() -> {
             while (controllerPersonTwoAnimation) {
                 person2Animation();
@@ -185,7 +184,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
             }
         }).start();
     }
-    private void startAnimationLosangle() {
+    protected void startAnimationLosangle() {
         new Thread(() -> {
             while (controllerPersonThreeAnimation) {
                 person3Animation();
@@ -197,7 +196,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
             }
         }).start();
     }
-    private void startAnimationTriangle() {
+    protected void startAnimationTriangle() {
         new Thread(() -> {
             while (controllerPersonFourAnimation) {
                 person4Animation();
@@ -212,7 +211,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
 
 
 
-    public void atualizeLife() {
+    protected void atualizeLife() {
         if (modifyLife == true) {
             controller.t_life.setText("Vidas: " + String.valueOf(LifeGame.lifeGame));
             modifyLife = false;
@@ -220,14 +219,13 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
     }
 
 
-    private Image loadImage(String imagePath) {
+    protected Image loadImage(String imagePath) {
         Image image = imageCache.get(imagePath);
         if (image == null) {
             File file = new File(imagePath);
             if (file.exists()) {
                 image = new Image(file.toURI().toString());
                 if (imageCache.size() >= 20) {
-
                     imageCache.entrySet().iterator().next();
                 }
                 imageCache.put(imagePath, image);
@@ -238,7 +236,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         return image;
     }
 
-    private void person3Animation() {
+    protected void person3Animation() {
         if (controllerPersonThreeAnimation) {
             if (animationLosangreProcessed) {
                 if (animationLosangle < 3) {
@@ -253,7 +251,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
     }
 
 
-    private void updateImage(String folder, String name, int index, int botao) {
+    protected void updateImage(String folder, String name, int index, int botao) {
 
         String imagePath = String.format("src/main/resources/br/com/opusnet/projetoapiidoscrias/%s/Char_%s%02d.png", folder, name, index);
 
@@ -296,7 +294,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
     }
 
 
-    private void handleButtonPress() {
+    protected void handleButtonPress() {
         if (!buttonProcessed) {
             if (controller.b_add.isPressed()) {
                 buttonPressed = 1;
@@ -322,7 +320,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         }
     }
 
-    private void handlePersonSelect() {
+    protected void handlePersonSelect() {
         if (!personSelectionProcessed) {
             if (controller.b_char1.isPressed()) {
                 System.out.println("Pessoa1Selecionada");
@@ -345,13 +343,13 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         }
     }
 
-    private void setSelection(double value) {
+    protected void setSelection(double value) {
         if (valueSelected[0] == 0) valueSelected[0] = value;
         else if (valueSelected[1] == 0) valueSelected[1] = value;
     }
 
 
-    public void checkAnswer() {
+    protected void checkAnswer() {
         if (valueSelected[0] != 0 && valueSelected[1] != 0 && buttonPressed != 0 && confirm) {
             System.out.println("bifewbfilweqol");
             confirm = false;
@@ -368,34 +366,13 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
                 LifeGame.lifeGame--;
                 resetGameState();
             } else {
-                    Platform.runLater(()->{
-                        gameLoop.stop();
-                        System.out.println("Passou!!!!!");
-                        URL url = null;
-                        try {
-                            url = new File("src/main/resources/br/com/opusnet/projetoapiidoscrias/level2.fxml").toURI().toURL();
-                        } catch (MalformedURLException e) {
-                            throw new RuntimeException(e);
-                        }
-                        FXMLLoader fxmlLoader = new FXMLLoader();
-                        fxmlLoader.setLocation(url);
-                        //SceneTwoController sceneTwoController = fxmlLoader.getController();
-                        SceneTwo sceneTwo = null;
-
-                        try {
-                            sceneTwo = new SceneTwo(fxmlLoader.load(),stage,fxmlLoader.getController());
-                            stage.setScene(sceneTwo);
-                        } catch (IOException e) {
-                            System.out.println("IOExcepition");
-                            throw new RuntimeException(e);
-                        }
-                    });
+                Platform.runLater(this::setChangeScene);
             }
 
         }
     }
 
-    private void resetGameState() {
+    protected void resetGameState() {
         buttonSelected = "   ";
         respostPerson = 0;
         buttonPressed = 0;
@@ -405,11 +382,10 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         verifyConfirmController = true;
     }
 
+    protected boolean verifyConfirmController = true;
+    protected boolean confirm = false;
 
-    private boolean verifyConfirmController = true;
-    private boolean confirm = false;
-
-    public void verifyConfirm() {
+    protected void verifyConfirm() {
         if (verifyConfirmController) {
             if (controller.b_confirm.isPressed()) {
                 confirm = true;
@@ -420,11 +396,8 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         }
     }
 
-
-
-
-    private boolean verifyDeletController = true;
-    public void verifyDelet() {
+    protected boolean verifyDeletController = true;
+    protected void verifyDelet() {
         if (verifyDeletController) {
             if (controller.b_delet.isPressed()) {
                 resetGameState();
@@ -437,7 +410,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
 
 
 
-    private void person1Animation() {
+    protected void person1Animation() {
         if (controllerPersonOneAnimation) {
             if (animationCircleProcessed) {
                 if (animationCircle < 32) {
@@ -450,7 +423,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
             }
         }
     }
-    private void person2Animation() {
+    protected void person2Animation() {
         if (controllerPersonTwoAnimation) {
             if (animationSquareProcessed) {
                 if (animationSquare < 57) {
@@ -465,7 +438,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
     }
 
 
-    private void person4Animation() {
+    protected void person4Animation() {
         if (controllerPersonFourAnimation) {
             if (animationTriangleProcessed) {
                 if (animationTriangle < 29) {
@@ -480,11 +453,12 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
     }
 
 
-    private void visibleAnswerUser(){
+    protected void visibleAnswerUser(){
         Platform.runLater(()->{
             controller.t_answer.setText(valueSelected[0]+ buttonSelected + valueSelected[1]);
         });
     }
 
+    public abstract void setChangeScene();
 
 }
