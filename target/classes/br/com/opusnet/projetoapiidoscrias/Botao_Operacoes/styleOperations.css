@@ -1,0 +1,42 @@
+.my-button:hover {
+    -fx-scale-x: 1.1; /* Aumenta o tamanho horizontalmente */
+    -fx-scale-y: 1.1; /* Aumenta o tamanho verticalmente */
+}
+
+.button{
+    -fx-background-color: transparent; /* Remove o fundo do botão */
+    -fx-border-color: transparent;    /* Remove a borda */
+    -fx-padding: 0;
+}
+
+#b_add{
+    -fx-background-image: url(sprite_0.png);
+    -fx-background-size: 200px 200px;
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#b_sub{
+    -fx-background-image: url(sprite_1.png);
+    -fx-background-size: 200px 200px;
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#b_div{
+    -fx-background-image: url(sprite_2.png);
+    -fx-background-size: 200px 200px;
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#b_mult{
+    -fx-background-image: url(sprite_3.png);
+    -fx-background-size: 200px 200px;
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
