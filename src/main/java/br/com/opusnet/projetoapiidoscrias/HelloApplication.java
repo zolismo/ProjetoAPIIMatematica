@@ -1,11 +1,11 @@
-package br.com.opusnet.projetoapiimatematica;
+package br.com.opusnet.projetoapiidoscrias;
 
-import br.com.opusnet.projetoapiimatematica.controlls.screencontrol.HomeSceneControl;
+import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.HomeSceneControl;
 
-import br.com.opusnet.projetoapiimatematica.scene.HomeScene;
+import br.com.opusnet.projetoapiidoscrias.scene.HomeScene;
 
-import br.com.opusnet.projetoapiimatematica.util.NavigatorScene;
-import br.com.opusnet.projetoapiimatematica.util.SizeScreen;
+import br.com.opusnet.projetoapiidoscrias.util.NavigatorScene;
+import br.com.opusnet.projetoapiidoscrias.util.SizeScreen;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;

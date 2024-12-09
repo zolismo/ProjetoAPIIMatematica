@@ -1,4 +1,4 @@
-module br.com.opusnet.ProjetoAPIIMatematica {
+module br.com.opusnet.projetoapiidoscrias {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -11,12 +11,12 @@ module br.com.opusnet.ProjetoAPIIMatematica {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
 
-    opens br.com.opusnet.projetoapiimatematica to javafx.fxml;
-    exports br.com.opusnet.projetoapiimatematica;
-    exports br.com.opusnet.projetoapiimatematica.scene;
-    opens br.com.opusnet.projetoapiimatematica.scene to javafx.fxml;
-    exports br.com.opusnet.projetoapiimatematica.controlls;
-    opens br.com.opusnet.projetoapiimatematica.controlls to javafx.fxml;
-    exports br.com.opusnet.projetoapiimatematica.controlls.screencontrol;
-    opens br.com.opusnet.projetoapiimatematica.controlls.screencontrol to javafx.fxml;
+    opens br.com.opusnet.projetoapiidoscrias to javafx.fxml;
+    exports br.com.opusnet.projetoapiidoscrias;
+    exports br.com.opusnet.projetoapiidoscrias.scene;
+    opens br.com.opusnet.projetoapiidoscrias.scene to javafx.fxml;
+    exports br.com.opusnet.projetoapiidoscrias.controlls;
+    opens br.com.opusnet.projetoapiidoscrias.controlls to javafx.fxml;
+    exports br.com.opusnet.projetoapiidoscrias.controlls.screencontrol;
+    opens br.com.opusnet.projetoapiidoscrias.controlls.screencontrol to javafx.fxml;
 }
