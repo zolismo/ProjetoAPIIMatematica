@@ -11,6 +11,9 @@ public class GameLoop implements Runnable {
     private Updatable updatable;
     private boolean running = true;
 
+    public GameLoop() {
+
+    }
     public GameLoop(Updatable updatable) {
         this.updatable = updatable;
     }
