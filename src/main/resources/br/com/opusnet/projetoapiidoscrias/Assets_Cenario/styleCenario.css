@@ -22,8 +22,3 @@
     -fx-scale-x: 1.2; /* Aumenta o tamanho horizontalmente */
     -fx-scale-y: 1.2; /* Aumenta o tamanho verticalmente */
 }
-
-.pane{
-    -fx-background-size: cover;
-    -fx-background-repeat: no-repeat;
-}

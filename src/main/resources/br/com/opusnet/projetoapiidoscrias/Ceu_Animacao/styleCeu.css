@@ -1,0 +1,6 @@
+.stackpane{
+    -fx-background-image: url(Ceu_Animado21.png);
+    -fx-background-size: contain;
+    //-fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
