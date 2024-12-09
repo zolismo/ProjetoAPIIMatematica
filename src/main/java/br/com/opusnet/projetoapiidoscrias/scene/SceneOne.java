@@ -2,25 +2,17 @@ package br.com.opusnet.projetoapiidoscrias.scene;
 
 import br.com.opusnet.projetoapiidoscrias.controlls.GameLoop;
 import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.SceneOneController;
-import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.SceneTwoController;
 import br.com.opusnet.projetoapiidoscrias.model.LifeGame;
 import br.com.opusnet.projetoapiidoscrias.model.ScreemInterface;
 import br.com.opusnet.projetoapiidoscrias.util.Updatable;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +20,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class SceneOne extends Scene implements Updatable, ScreemInterface {
     private final GameLoop gameLoop;
@@ -45,6 +36,8 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
     private double respostPerson;
     private double[] valueSelected = {0, 0};
     private int buttonPressed = 0;
+
+    private String buttonSelected = "     ";
 
 
 
@@ -105,6 +98,9 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
 
     @Override
     public void render() {
+
+        visibleAnswerUser();
+
         controller.b_char1.setOnMouseEntered((e) -> {
             controllerPersonOneAnimation = true;
             animationCircleProcessed = true;
@@ -132,7 +128,6 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
         });
 
         controller.b_char3.setOnMouseEntered((e) -> {
-            // Inicia a animação quando o mouse entra
             controllerPersonThreeAnimation = true;
             animationLosangreProcessed = true;
             animationLosangle = 0;
@@ -141,8 +136,8 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
 
         controller.b_char3.setOnMouseExited((e) -> {
 
-            controllerPersonThreeAnimation = false;  // Interrompe a animação
-            animationLosangreProcessed = false;  // Não incrementa mais o losango
+            controllerPersonThreeAnimation = false;
+            animationLosangreProcessed = false;
         });
 
         controller.b_char4.setOnMouseEntered((e) -> {
@@ -175,7 +170,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
             while (controllerPersonOneAnimation) {
                 person1Animation();
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(10);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();                  }
             }
@@ -187,7 +182,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
             while (controllerPersonTwoAnimation) {
                 person2Animation();
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(10);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
@@ -199,7 +194,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
             while (controllerPersonThreeAnimation) {
                 person3Animation();
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(10);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
@@ -211,7 +206,7 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
             while (controllerPersonFourAnimation) {
                 person4Animation();
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(10);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
@@ -310,15 +305,19 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
             if (controller.b_add.isPressed()) {
                 buttonPressed = 1;
                 buttonProcessed = true;
+                buttonSelected = " + ";
             } else if (controller.b_sub.isPressed()) {
                 buttonPressed = 2;
                 buttonProcessed = true;
+                buttonSelected = " - ";
             } else if (controller.b_mult.isPressed()) {
                 buttonPressed = 3;
                 buttonProcessed = true;
+                buttonSelected = " x ";
             } else if (controller.b_div.isPressed()) {
                 buttonPressed = 4;
                 buttonProcessed = true;
+                buttonSelected = " / ";
             }
         }
 
@@ -480,47 +479,10 @@ public class SceneOne extends Scene implements Updatable, ScreemInterface {
     }
 
 
-
-
-
-
-    private boolean controllerEnimeAnimation = true;
-
-    private void animationEnime2() {
-        if (controllerEnimeAnimation == true) {
-            Task<Void> task = new Task<Void>() {
-                @Override
-                protected Void call() throws Exception {
-                    if (animationEnimeProcessed && animationEnime < 7) {
-
-                        String enimePath = String.format("src/main/resources/br/com/opusnet/projetoapiidoscrias/Enemy_Boss/Enemy_Boss" + animationEnime + ".png");
-                        animationEnime++;
-
-                        Image image = imageCache.get(enimePath);
-                        if (image == null) {
-                            File file = new File(enimePath);
-                            if (file.exists()) {
-                                image = new Image(file.toURI().toString());
-                                imageCache.put(enimePath, image);
-                                controller.iv_enemy1.setImage(image);
-                            } else {
-                                System.out.println("Imagem não encontrada: " + enimePath);
-                            }
-                        }
-
-                    } else if (animationEnime >= 7) {
-                        animationEnimeProcessed = false;
-                        animationEnime = 0;
-                    } else {
-                        animationEnimeProcessed = false;
-                        animationEnime = 0;
-                    }
-
-                    return null;
-                }
-
-            };
-        }
+    private void visibleAnswerUser(){
+        Platform.runLater(()->{
+            controller.t_answer.setText(valueSelected[0]+ buttonSelected + valueSelected[1]);
+        });
     }
 
 
