@@ -1,6 +1,7 @@
 package br.com.opusnet.projetoapiidoscrias.view.scene;
 
 import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.SceneOneController;
+import br.com.opusnet.projetoapiidoscrias.model.AbstractScene;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class SceneTwo extends AbstractScene{
+public class SceneTwo extends AbstractScene {
     public SceneTwo(Parent root, Stage stage, SceneOneController controll) {
         super(root,stage,controll,"windows",900,"500", "300","400", "100");
     }

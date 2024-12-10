@@ -1,10 +1,10 @@
-package br.com.opusnet.projetoapiidoscrias.view.scene;
+package br.com.opusnet.projetoapiidoscrias.model;
 
 import br.com.opusnet.projetoapiidoscrias.controlls.GameLoop;
 import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.SceneOneController;
 import br.com.opusnet.projetoapiidoscrias.model.LifeGame;
-import br.com.opusnet.projetoapiidoscrias.model.ScreemInterface;
 import br.com.opusnet.projetoapiidoscrias.model.util.Updatable;
+import br.com.opusnet.projetoapiidoscrias.view.scene.GameOverScreem;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.application.Platform;
@@ -24,7 +24,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class AbstractScene extends Scene implements Updatable, ScreemInterface {
+public abstract class AbstractScene extends Scene implements Updatable {
     protected GameLoop gameLoop = new GameLoop();
     protected final SceneOneController controller;
     protected final Stage stage;
@@ -411,8 +411,8 @@ public abstract class AbstractScene extends Scene implements Updatable, ScreemIn
             System.out.println("Resposta calculada: " + respostPerson);
 
             if (respostPerson != valueEnime) {
-                LifeGame.lifeGame--;
                 resetGameState();
+                LifeGame.lifeGame--;
             } else {
                 Platform.runLater(()->{
                     gameLoop.stop();
@@ -437,11 +437,12 @@ public abstract class AbstractScene extends Scene implements Updatable, ScreemIn
     }
 
     protected void resetGameState() {
+        buttonProcessed = false;
         buttonSelected = "   ";
         respostPerson = 0;
         buttonPressed = 0;
         personSelectionProcessed = false;
-        buttonProcessed = false;
+        confirm = false;
         valueSelected = new double[]{0, 0};
         verifyConfirmController = true;
     }

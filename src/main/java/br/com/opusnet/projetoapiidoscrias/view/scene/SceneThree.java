@@ -1,6 +1,7 @@
 package br.com.opusnet.projetoapiidoscrias.view.scene;
 
 import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.SceneOneController;
+import br.com.opusnet.projetoapiidoscrias.model.AbstractScene;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;

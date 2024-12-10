@@ -2,7 +2,7 @@ package br.com.opusnet.projetoapiidoscrias.view.scene;
 
 import br.com.opusnet.projetoapiidoscrias.controlls.GameLoop;
 import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.HomeSceneControl;
-import br.com.opusnet.projetoapiidoscrias.model.ScreemInterface;
+
 import br.com.opusnet.projetoapiidoscrias.model.util.Updatable;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
@@ -18,7 +18,7 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class HomeScene extends Scene implements Updatable, ScreemInterface {
+public class HomeScene extends Scene implements Updatable {
     private HomeSceneControl homeSceneControl;
     private GameLoop gameLoop;
     private Stage stage;
