@@ -2,6 +2,7 @@ package br.com.opusnet.projetoapiidoscrias.view.scene;
 
 import br.com.opusnet.projetoapiidoscrias.controlls.GameLoop;
 import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.GameOverController;
+import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.SceneOneController;
 import br.com.opusnet.projetoapiidoscrias.model.LifeGame;
 import br.com.opusnet.projetoapiidoscrias.model.util.Updatable;
 import javafx.animation.FadeTransition;
@@ -30,6 +31,9 @@ public class GameOverScreem extends Scene implements Updatable {
         }else{
             throw new IllegalArgumentException();
         }
+
+        SceneOneController.movement = 1;
+
         this.stage = stage;
         FadeTransition ft2 = new FadeTransition();
         ft2.setDuration(Duration.millis(3000));
