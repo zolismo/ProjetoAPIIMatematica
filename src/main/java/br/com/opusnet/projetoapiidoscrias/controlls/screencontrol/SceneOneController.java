@@ -1,6 +1,7 @@
 package br.com.opusnet.projetoapiidoscrias.controlls.screencontrol;
 
 import br.com.opusnet.projetoapiidoscrias.model.Controll;
+import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -111,6 +112,14 @@ public class SceneOneController implements Controll, Initializable{
                 break;
             }
             case 3:{
+                RotateTransition rt = new RotateTransition();
+                rt.setNode(iv_enemy);
+                rt.setDuration(Duration.millis(2500));
+                rt.setCycleCount(TranslateTransition.INDEFINITE);
+                rt.setFromAngle(-10);
+                rt.setToAngle(10);
+                rt.setAutoReverse(true);
+                rt.play();
                 break;
             }
             case 4:{
