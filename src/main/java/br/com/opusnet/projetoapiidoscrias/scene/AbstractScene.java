@@ -377,7 +377,6 @@ public abstract class AbstractScene extends Scene implements Updatable, ScreemIn
             } else {
                 Platform.runLater(()->{
                     gameLoop.stop();
-
                     FadeTransition fadeOut = new FadeTransition(Duration.millis(2000), controller.ac_start);
                     fadeOut.setFromValue(1.0);
                     fadeOut.setToValue(0.0);
