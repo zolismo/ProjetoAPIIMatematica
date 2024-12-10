@@ -1,6 +1,4 @@
-package br.com.opusnet.projetoapiidoscrias.util;
-
-import javafx.stage.Screen;
+package br.com.opusnet.projetoapiidoscrias.model.util;
 
 public class SizeScreen {
      public static double valueHeight;

@@ -1,4 +1,4 @@
-package br.com.opusnet.projetoapiidoscrias.scene;
+package br.com.opusnet.projetoapiidoscrias.view.scene;
 
 import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.SceneOneController;
 import javafx.fxml.FXMLLoader;
