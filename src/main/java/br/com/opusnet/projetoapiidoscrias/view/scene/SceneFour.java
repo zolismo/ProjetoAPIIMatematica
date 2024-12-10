@@ -19,8 +19,6 @@ public class SceneFour extends AbstractScene {
 
     @Override
     public void setChangeScene() {
-        gameLoop.stop();
-        System.out.println("Passou!!!!!");
         URL url = null;
         try {
             url = new File("src/main/resources/br/com/opusnet/projetoapiidoscrias/level5.fxml").toURI().toURL();
