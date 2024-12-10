@@ -1,6 +1,8 @@
 package br.com.opusnet.projetoapiidoscrias.controlls.screencontrol;
 
 import br.com.opusnet.projetoapiidoscrias.model.Controll;
+import javafx.animation.Interpolator;
+import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
@@ -9,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -123,6 +126,14 @@ public class SceneOneController implements Controll, Initializable{
                 break;
             }
             case 4:{
+                Circle circle = new Circle(20);
+                PathTransition transition = new PathTransition();
+                transition.setNode(iv_enemy);
+                transition.setDuration(Duration.millis(4000));
+                transition.setPath(circle);
+                transition.setCycleCount(PathTransition.INDEFINITE);
+                transition.setInterpolator(Interpolator.LINEAR);
+                transition.play();
                 break;
             }
             case 5:{
