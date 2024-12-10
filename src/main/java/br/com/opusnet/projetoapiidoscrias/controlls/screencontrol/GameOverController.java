@@ -13,6 +13,7 @@ public class GameOverController implements Controll {
     @FXML
     public Button b_restart = new Button();
 
-    @FXML Button b_quit = new Button();
+    @FXML
+    public Button b_quit = new Button();
 
 }
