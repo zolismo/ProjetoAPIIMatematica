@@ -67,7 +67,7 @@
                      <font>
                         <Font name="Pixelate Regular" size="14.0" />
                      </font></Text>
-                  <Text fx:id="t_equacao" fill="#ef0a0a" layoutX="351.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A equação pode aparecer aqui">
+                  <Text fx:id="t_equacao" fill="#ef0a0a" layoutX="403.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A equação pode aparecer aqui">
                      <font>
                         <Font name="Pixelate Regular" size="24.0" />
                      </font>

@@ -137,8 +137,8 @@ public class SceneOneController implements Controll, Initializable{
                 ScaleTransition sc = new ScaleTransition();
                 sc.setNode(iv_enemy);
                 sc.setDuration(Duration.millis(40000));
-                sc.setToX(10);
-                sc.setToY(10);
+                sc.setToX(5);
+                sc.setToY(5);
                 sc.play();
                 break;
             }
