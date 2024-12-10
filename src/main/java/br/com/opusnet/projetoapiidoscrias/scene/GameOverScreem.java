@@ -6,6 +6,7 @@ import br.com.opusnet.projetoapiidoscrias.model.Controll;
 import br.com.opusnet.projetoapiidoscrias.util.Updatable;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
+import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -36,11 +37,25 @@ public class GameOverScreem extends Scene implements Updatable {
 
     @Override
     public void update() throws IOException {
-
+        verifyRestart();
+        verifyQuit();
     }
 
     @Override
     public void render() {
 
     }
+
+    public void verifyRestart(){
+        Platform.runLater(()->{
+
+        });
+    }
+
+    public void verifyQuit(){
+        Platform.runLater(()->{
+
+        });
+    }
+
 }
