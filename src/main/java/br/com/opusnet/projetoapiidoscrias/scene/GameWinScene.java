@@ -17,6 +17,8 @@ import java.io.IOException;
 
 public class GameWinScene extends Scene implements Updatable {
 
+    private GameLoop gameLoop;
+
     private GameWinController controller;
     public GameWinScene(Parent root, Stage stage, Controll controller) {
         super(root);
@@ -32,11 +34,14 @@ public class GameWinScene extends Scene implements Updatable {
         ft2.setFromValue(0.0);
         ft2.setToValue(1.0);
         ft2.play();
+        gameLoop = new GameLoop(this);
+        new Thread(gameLoop).start();
+
     }
 
     @Override
     public void update() throws IOException {
-
+        verifyQuit();
     }
 
     @Override
@@ -47,6 +52,7 @@ public class GameWinScene extends Scene implements Updatable {
     public void verifyQuit(){
         Platform.runLater(()->{
             if(controller.b_quit.isPressed()){
+                gameLoop.stop();
                 System.exit(0);
             }
         });
