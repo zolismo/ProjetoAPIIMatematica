@@ -5,15 +5,23 @@ import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.SceneOneContro
 import br.com.opusnet.projetoapiidoscrias.model.LifeGame;
 import br.com.opusnet.projetoapiidoscrias.model.ScreemInterface;
 import br.com.opusnet.projetoapiidoscrias.util.Updatable;
+import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
+import javafx.animation.ParallelTransition;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -167,7 +175,8 @@ public abstract class AbstractScene extends Scene implements Updatable, ScreemIn
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();                  }
+                    Thread.currentThread().interrupt();
+                }
             }
         }).start();
     }
@@ -366,7 +375,18 @@ public abstract class AbstractScene extends Scene implements Updatable, ScreemIn
                 LifeGame.lifeGame--;
                 resetGameState();
             } else {
-                Platform.runLater(this::setChangeScene);
+                Platform.runLater(()->{
+                    gameLoop.stop();
+
+                    FadeTransition fadeOut = new FadeTransition(Duration.millis(2000), controller.ac_start);
+                    fadeOut.setFromValue(1.0);
+                    fadeOut.setToValue(0.0);
+
+                    ParallelTransition parallelTransition = new ParallelTransition(fadeOut);
+                    parallelTransition.setInterpolator(Interpolator.EASE_BOTH);
+                    parallelTransition.setOnFinished(event -> setChangeScene());
+                    parallelTransition.play();
+                });
             }
 
         }
