@@ -170,6 +170,7 @@ public abstract class AbstractScene extends Scene implements Updatable, ScreemIn
 
 
         if (LifeGame.lifeGame == 0) {
+            gameLoop.stop();
             Platform.runLater(()->{
                 FadeTransition ft = new FadeTransition();
                 ft.setDuration(Duration.millis(1000));
@@ -178,8 +179,6 @@ public abstract class AbstractScene extends Scene implements Updatable, ScreemIn
                 ft.setFromValue(1.0);
                 ft.setToValue(0.0);
                 ft.setOnFinished((ActionEvent event) ->{
-                    gameLoop.stop();
-
                     URL url = null;
                     try {
                         url = new File("src/main/resources/br/com/opusnet/projetoapiidoscrias/game-over.fxml").toURI().toURL();
@@ -202,6 +201,7 @@ public abstract class AbstractScene extends Scene implements Updatable, ScreemIn
                         throw new RuntimeException(e);
                     }
                 });
+                ft.play();
             });
         }
 
