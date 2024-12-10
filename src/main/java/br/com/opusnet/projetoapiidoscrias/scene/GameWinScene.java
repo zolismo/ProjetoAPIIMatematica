@@ -1,16 +1,23 @@
 package br.com.opusnet.projetoapiidoscrias.scene;
 
+import br.com.opusnet.projetoapiidoscrias.controlls.GameLoop;
 import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.GameOverController;
 import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.GameWinController;
 import br.com.opusnet.projetoapiidoscrias.model.Controll;
+import br.com.opusnet.projetoapiidoscrias.util.Updatable;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
+import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class GameWinScene extends Scene {
+import java.io.IOException;
+
+public class GameWinScene extends Scene implements Updatable {
+
+    private GameLoop gameLoop;
 
     private GameWinController controller;
     public GameWinScene(Parent root, Stage stage, Controll controller) {
@@ -27,5 +34,28 @@ public class GameWinScene extends Scene {
         ft2.setFromValue(0.0);
         ft2.setToValue(1.0);
         ft2.play();
+        gameLoop = new GameLoop(this);
+        new Thread(gameLoop).start();
+
     }
+
+    @Override
+    public void update() throws IOException {
+        verifyQuit();
+    }
+
+    @Override
+    public void render() {
+
+    }
+
+    public void verifyQuit(){
+        Platform.runLater(()->{
+            if(controller.b_quit.isPressed()){
+                gameLoop.stop();
+                System.exit(0);
+            }
+        });
+    }
+
 }
