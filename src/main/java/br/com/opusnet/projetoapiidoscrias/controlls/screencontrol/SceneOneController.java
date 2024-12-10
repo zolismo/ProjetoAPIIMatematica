@@ -1,10 +1,7 @@
 package br.com.opusnet.projetoapiidoscrias.controlls.screencontrol;
 
 import br.com.opusnet.projetoapiidoscrias.model.Controll;
-import javafx.animation.Interpolator;
-import javafx.animation.PathTransition;
-import javafx.animation.RotateTransition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -137,6 +134,12 @@ public class SceneOneController implements Controll, Initializable{
                 break;
             }
             case 5:{
+                ScaleTransition sc = new ScaleTransition();
+                sc.setNode(iv_enemy);
+                sc.setDuration(Duration.millis(40000));
+                sc.setToX(1000);
+                sc.setToY(1000);
+                sc.play();
                 break;
             }
         }
