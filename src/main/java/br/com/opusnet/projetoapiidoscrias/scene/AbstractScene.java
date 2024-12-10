@@ -172,7 +172,36 @@ public abstract class AbstractScene extends Scene implements Updatable, ScreemIn
         if (LifeGame.lifeGame == 0) {
             gameLoop.stop();
             Platform.runLater(()->{
-                
+                FadeTransition ft = new FadeTransition();
+                ft.setDuration(Duration.millis(1000));
+                ft.setNode(controller.ac_start);
+                ft.setInterpolator(Interpolator.EASE_BOTH);
+                ft.setFromValue(1.0);
+                ft.setToValue(0.0);
+                ft.setOnFinished((ActionEvent event) ->{
+                    URL url = null;
+                    try {
+                        url = new File("src/main/resources/br/com/opusnet/projetoapiidoscrias/game-over.fxml").toURI().toURL();
+                    } catch (MalformedURLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(url);
+                    GameOverScreem gameOverScreem = null;
+
+                    try {
+                        gameOverScreem = new GameOverScreem(fxmlLoader.load(),stage,fxmlLoader.getController());
+
+                        stage.setScene(gameOverScreem);
+
+
+
+                    } catch (IOException e) {
+                        System.out.println("IOExcepition");
+                        throw new RuntimeException(e);
+                    }
+                });
+                ft.play();
             });
         }
 
@@ -395,6 +424,9 @@ public abstract class AbstractScene extends Scene implements Updatable, ScreemIn
                     ft.setFromValue(1.0);
                     ft.setToValue(0.0);
                     ft.setOnFinished((ActionEvent event) ->{
+                        if(SceneOneController.movement<5)
+                            SceneOneController.movement++;
+
                         setChangeScene();
                     });
                     ft.play();

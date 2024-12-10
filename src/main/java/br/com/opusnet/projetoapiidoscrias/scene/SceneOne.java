@@ -1,30 +1,14 @@
 package br.com.opusnet.projetoapiidoscrias.scene;
 
-import br.com.opusnet.projetoapiidoscrias.controlls.GameLoop;
-import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.HomeSceneControl;
 import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.SceneOneController;
-import br.com.opusnet.projetoapiidoscrias.model.LifeGame;
-import br.com.opusnet.projetoapiidoscrias.model.ScreemInterface;
-import br.com.opusnet.projetoapiidoscrias.util.Updatable;
-
-import javafx.animation.FadeTransition;
-import javafx.animation.Interpolator;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 public class SceneOne extends AbstractScene {
 
