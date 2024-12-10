@@ -51,23 +51,23 @@
                         <Font name="Pixelate Regular" size="18.0" />
                      </font>
                   </Text>
-                  <Text fx:id="t_res1" layoutX="94.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                  <Text fx:id="t_res1" layoutX="92.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                      <font>
-                        <Font name="Pixelate Regular" size="12.0" />
+                        <Font name="Pixelate Regular" size="14.0" />
                      </font></Text>
-                  <Text fx:id="t_res2" layoutX="158.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                  <Text fx:id="t_res2" layoutX="156.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                      <font>
-                        <Font name="Pixelate Regular" size="12.0" />
+                        <Font name="Pixelate Regular" size="14.0" />
                      </font></Text>
-                  <Text fx:id="t_res3" layoutX="219.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                  <Text fx:id="t_res3" layoutX="217.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                      <font>
-                        <Font name="Pixelate Regular" size="12.0" />
+                        <Font name="Pixelate Regular" size="14.0" />
                      </font></Text>
-                  <Text fx:id="t_res4" layoutX="272.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                  <Text fx:id="t_res4" layoutX="270.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                      <font>
-                        <Font name="Pixelate Regular" size="12.0" />
+                        <Font name="Pixelate Regular" size="14.0" />
                      </font></Text>
-                  <Text fx:id="t_equacao" layoutX="403.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A equação pode aparecer aqui" textAlignment="JUSTIFY">
+                  <Text fx:id="t_equacao" layoutX="383.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A equação pode aparecer aqui" textAlignment="JUSTIFY">
                      <font>
                         <Font name="Pixelate Regular" size="24.0" />
                      </font>

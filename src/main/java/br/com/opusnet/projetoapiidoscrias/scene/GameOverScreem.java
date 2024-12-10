@@ -4,6 +4,7 @@ import br.com.opusnet.projetoapiidoscrias.controlls.GameLoop;
 import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.GameOverController;
 import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.HomeSceneControl;
 import br.com.opusnet.projetoapiidoscrias.model.Controll;
+import br.com.opusnet.projetoapiidoscrias.model.LifeGame;
 import br.com.opusnet.projetoapiidoscrias.util.Updatable;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
@@ -58,6 +59,8 @@ public class GameOverScreem extends Scene implements Updatable {
     public void verifyRestart(){
         Platform.runLater(()->{
             if(controller.b_restart.isPressed()){
+                gameLoop.stop();
+                LifeGame.lifeGame = 3;
                 FadeTransition ft = new FadeTransition();
                 ft.setDuration(Duration.millis(1000));
                 ft.setNode(controller.ac_start);
@@ -65,13 +68,25 @@ public class GameOverScreem extends Scene implements Updatable {
                 ft.setToValue(0.0);
                 ft.setOnFinished((ActionEvent event) ->{
                     try{
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("start-screen.fxml"));
-                        Parent root = fxmlLoader.load();
+                        URL url = null;
+                        try {
+                            url = new File("src/main/resources/br/com/opusnet/projetoapiidoscrias/level1.fxml").toURI().toURL();
+                        } catch (MalformedURLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        gameLoop.stop();
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        fxmlLoader.setLocation(url);
+                        SceneOne sceneOne = null;
 
-                        HomeSceneControl homeSceneControl = fxmlLoader.getController();
-                        HomeScene homeScene = new HomeScene(root, stage,homeSceneControl);
-                    }catch (RuntimeException | IOException e){
-
+                        try {
+                            sceneOne = new SceneOne(fxmlLoader.load(),stage,fxmlLoader.getController());
+                            stage.setScene(sceneOne);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }catch (RuntimeException e){
+                        System.out.println(e.getMessage());
                     }
                 });
                 ft.play();
