@@ -15,7 +15,7 @@ public class SceneOne extends AbstractScene {
 
 
     public SceneOne(Parent root,Stage stage, SceneOneController controller){
-        super(root,stage,controller,"x² - 500x + 62500 = 0",250,"200","90","50","20");
+        super(root,stage,controller,"42 + 86 + 32 + 25 = ?",185,"75","95","110","20");
     }
 
     @Override

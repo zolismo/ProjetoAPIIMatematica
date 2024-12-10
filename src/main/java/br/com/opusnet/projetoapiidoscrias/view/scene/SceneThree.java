@@ -13,7 +13,7 @@ import java.net.URL;
 
 public class SceneThree extends AbstractScene {
     public SceneThree(Parent root, Stage stage, SceneOneController sceneOneController) {
-        super(root,stage,sceneOneController,"  ", 2, "1", "1323", "1","5");
+        super(root,stage,sceneOneController," 900 / 30 / 15 = ? ", 2, "50", "65", "2","25");
     }
 
 
