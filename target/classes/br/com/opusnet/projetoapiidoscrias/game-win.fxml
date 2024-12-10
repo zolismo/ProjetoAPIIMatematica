@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.0" prefHeight="600.0" prefWidth="1000.0" styleClass="anchorpane" stylesheets="@Tela_Inicial/styleStart.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="ac_start" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.0" prefHeight="600.0" prefWidth="1000.0" styleClass="anchorpane" stylesheets="@Tela_Inicial/styleStart.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.GameWinController">
    <children>
       <Text fill="#101010" layoutX="211.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Obrigado por jogar!">
          <font>

@@ -424,6 +424,9 @@ public abstract class AbstractScene extends Scene implements Updatable, ScreemIn
                     ft.setFromValue(1.0);
                     ft.setToValue(0.0);
                     ft.setOnFinished((ActionEvent event) ->{
+                        if(SceneOneController.movement<5)
+                            SceneOneController.movement++;
+
                         setChangeScene();
                     });
                     ft.play();

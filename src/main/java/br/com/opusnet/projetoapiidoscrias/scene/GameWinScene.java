@@ -1,6 +1,7 @@
 package br.com.opusnet.projetoapiidoscrias.scene;
 
 import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.GameOverController;
+import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.GameWinController;
 import br.com.opusnet.projetoapiidoscrias.model.Controll;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
@@ -9,12 +10,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class GameOverScreem extends Scene {
-    private GameOverController controller;
-    public GameOverScreem(Parent root, Stage stage, GameOverController controller) {
+public class GameWinScene extends Scene {
+
+    private GameWinController controller;
+    public GameWinScene(Parent root, Stage stage, Controll controller) {
         super(root);
-        if(controller instanceof GameOverController){
-            this.controller = (GameOverController) controller;
+        if(controller instanceof GameWinController){
+            this.controller = (GameWinController) controller;
         }else{
             throw new IllegalArgumentException();
         }

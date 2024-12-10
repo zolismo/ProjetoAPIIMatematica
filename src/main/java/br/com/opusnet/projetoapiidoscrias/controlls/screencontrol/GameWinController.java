@@ -4,7 +4,7 @@ import br.com.opusnet.projetoapiidoscrias.model.Controll;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 
-public class GameOverController implements Controll {
+public class GameWinController implements Controll {
 
     @FXML
     public AnchorPane ac_start = new AnchorPane();
