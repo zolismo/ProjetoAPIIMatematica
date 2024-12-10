@@ -93,7 +93,7 @@ public class GameOverScreem extends Scene implements Updatable {
 
     public void verifyQuit(){
         Platform.runLater(()->{
-            if (controller.b_restart.isPressed()){
+            if (this.controller.b_quit.isPressed()){
                 System.exit(0);
             }
         });
