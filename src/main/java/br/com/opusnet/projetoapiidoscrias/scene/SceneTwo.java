@@ -19,7 +19,7 @@ public class SceneTwo extends AbstractScene{
 
     @Override
     public void setChangeScene() {
-        gameLoop.stop();
+
         System.out.println("Passou!!!!!");
         URL url = null;
         try {
@@ -32,6 +32,7 @@ public class SceneTwo extends AbstractScene{
         SceneThree sceneThree = null;
 
         try {
+
             sceneThree = new SceneThree(fxmlLoader.load(),stage,fxmlLoader.getController());
             stage.setScene(sceneThree);
         } catch (IOException e) {
