@@ -77,6 +77,14 @@ public abstract class AbstractScene extends Scene implements Updatable, ScreemIn
         controller.t_equacao.setText(equacionEnime);
         gameLoop = new GameLoop(this);
         new Thread(gameLoop).start();
+
+        FadeTransition ft2 = new FadeTransition();
+        ft2.setDuration(Duration.millis(3000));
+        ft2.setNode(controller.ac_start);
+        ft2.setInterpolator(Interpolator.EASE_BOTH);
+        ft2.setFromValue(0.0);
+        ft2.setToValue(1.0);
+        ft2.play();
     }
 
     protected void setValuesPerson(String value1, String value2,String value3,String value4) {
