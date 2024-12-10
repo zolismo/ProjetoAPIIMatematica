@@ -149,7 +149,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                br.com.opusnet.projetoapiidoscrias/br.com.opusnet.projetoapiidoscrias.HelloApplication
+                                br.com.opusnet.projetoapiidoscrias/br.com.opusnet.projetoapiidoscrias.view.HelloApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

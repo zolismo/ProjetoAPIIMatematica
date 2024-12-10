@@ -1,6 +1,6 @@
 package br.com.opusnet.projetoapiidoscrias.controlls;
 
-import br.com.opusnet.projetoapiidoscrias.util.Updatable;
+import br.com.opusnet.projetoapiidoscrias.model.util.Updatable;
 import javafx.application.Platform;
 
 import java.io.IOException;

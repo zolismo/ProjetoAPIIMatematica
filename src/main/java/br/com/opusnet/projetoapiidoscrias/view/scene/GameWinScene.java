@@ -1,10 +1,9 @@
-package br.com.opusnet.projetoapiidoscrias.scene;
+package br.com.opusnet.projetoapiidoscrias.view.scene;
 
 import br.com.opusnet.projetoapiidoscrias.controlls.GameLoop;
-import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.GameOverController;
 import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.GameWinController;
 import br.com.opusnet.projetoapiidoscrias.model.Controll;
-import br.com.opusnet.projetoapiidoscrias.util.Updatable;
+import br.com.opusnet.projetoapiidoscrias.model.util.Updatable;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.application.Platform;

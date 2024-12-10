@@ -11,12 +11,12 @@ module br.com.opusnet.projetoapiidoscrias {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
 
-    opens br.com.opusnet.projetoapiidoscrias to javafx.fxml;
-    exports br.com.opusnet.projetoapiidoscrias;
-    exports br.com.opusnet.projetoapiidoscrias.scene;
-    opens br.com.opusnet.projetoapiidoscrias.scene to javafx.fxml;
+    exports br.com.opusnet.projetoapiidoscrias.view.scene;
+    opens br.com.opusnet.projetoapiidoscrias.view.scene to javafx.fxml;
     exports br.com.opusnet.projetoapiidoscrias.controlls;
     opens br.com.opusnet.projetoapiidoscrias.controlls to javafx.fxml;
     exports br.com.opusnet.projetoapiidoscrias.controlls.screencontrol;
     opens br.com.opusnet.projetoapiidoscrias.controlls.screencontrol to javafx.fxml;
+    exports br.com.opusnet.projetoapiidoscrias.view;
+    opens br.com.opusnet.projetoapiidoscrias.view to javafx.fxml;
 }

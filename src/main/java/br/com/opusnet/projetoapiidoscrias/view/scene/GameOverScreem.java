@@ -1,11 +1,9 @@
-package br.com.opusnet.projetoapiidoscrias.scene;
+package br.com.opusnet.projetoapiidoscrias.view.scene;
 
 import br.com.opusnet.projetoapiidoscrias.controlls.GameLoop;
 import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.GameOverController;
-import br.com.opusnet.projetoapiidoscrias.controlls.screencontrol.HomeSceneControl;
-import br.com.opusnet.projetoapiidoscrias.model.Controll;
 import br.com.opusnet.projetoapiidoscrias.model.LifeGame;
-import br.com.opusnet.projetoapiidoscrias.util.Updatable;
+import br.com.opusnet.projetoapiidoscrias.model.util.Updatable;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.application.Platform;
@@ -17,7 +15,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
