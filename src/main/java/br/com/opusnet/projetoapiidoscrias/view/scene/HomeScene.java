@@ -34,7 +34,7 @@ public class HomeScene extends Scene implements Updatable {
 
         stage.setScene(this);
 
-        stage.setTitle("Valus");
+        stage.setTitle("MathQuest");
         stage.show();
         gameLoop = new GameLoop(this);
         new Thread(gameLoop).start();
