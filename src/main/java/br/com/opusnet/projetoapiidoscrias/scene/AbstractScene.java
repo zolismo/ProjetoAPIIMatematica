@@ -163,6 +163,9 @@ public abstract class AbstractScene extends Scene implements Updatable, ScreemIn
 
         if (LifeGame.lifeGame == 0) {
             gameLoop.stop();
+            Platform.runLater(()->{
+                
+            });
         }
 
 
