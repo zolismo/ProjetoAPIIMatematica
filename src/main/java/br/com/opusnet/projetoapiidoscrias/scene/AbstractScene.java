@@ -7,7 +7,6 @@ import br.com.opusnet.projetoapiidoscrias.model.ScreemInterface;
 import br.com.opusnet.projetoapiidoscrias.util.Updatable;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
-import javafx.animation.ParallelTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -377,14 +376,17 @@ public abstract class AbstractScene extends Scene implements Updatable, ScreemIn
             } else {
                 Platform.runLater(()->{
                     gameLoop.stop();
-                    FadeTransition fadeOut = new FadeTransition(Duration.millis(2000), controller.ac_start);
-                    fadeOut.setFromValue(1.0);
-                    fadeOut.setToValue(0.0);
 
-                    ParallelTransition parallelTransition = new ParallelTransition(fadeOut);
-                    parallelTransition.setInterpolator(Interpolator.EASE_BOTH);
-                    parallelTransition.setOnFinished(event -> setChangeScene());
-                    parallelTransition.play();
+                    FadeTransition ft = new FadeTransition();
+                    ft.setDuration(Duration.millis(1000));
+                    ft.setNode(controller.ac_start);
+                    ft.setInterpolator(Interpolator.EASE_BOTH);
+                    ft.setFromValue(1.0);
+                    ft.setToValue(0.0);
+                    ft.setOnFinished((ActionEvent event) ->{
+                        setChangeScene();
+                    });
+                    ft.play();
                 });
             }
 
